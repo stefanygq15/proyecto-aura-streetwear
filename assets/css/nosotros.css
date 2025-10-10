@@ -1,0 +1,478 @@
+.main-nosotros {
+    overflow-x: hidden;
+}
+
+/* Hero Section */
+.hero-nosotros {
+    background: linear-gradient(135deg, var(--azul-noche) 0%, var(--negro) 100%);
+    padding: 8rem 0 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-nosotros:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('https://images.unsplash.com/photo-1558769132-cb25e5b83573?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80') center/cover;
+    opacity: 0.1;
+}
+
+.hero-contenido {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-nosotros h1 {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(45deg, var(--verde-neon), var(--blanco));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-subtitulo {
+    font-size: 1.3rem;
+    color: var(--gris-claro);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Secciones generales */
+.seccion {
+    padding: 5rem 0;
+}
+
+.titulo-seccion {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--verde-neon);
+}
+
+.subtitulo-seccion {
+    text-align: center;
+    font-size: 1.2rem;
+    color: var(--gris-medio);
+    max-width: 600px;
+    margin: 0 auto 3rem;
+    line-height: 1.6;
+}
+
+/* Quiénes Somos */
+.quines-somos {
+    background: var(--negro);
+}
+
+.grid-quines-somos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.texto-quines-somos h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--verde-neon);
+}
+
+.intro {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+    color: var(--gris-claro);
+}
+
+.valores {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.valor-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+}
+
+.valor-item i {
+    font-size: 2rem;
+    color: var(--verde-neon);
+    margin-top: 0.5rem;
+    flex-shrink: 0;
+}
+
+.valor-item h3 {
+    margin-bottom: 0.5rem;
+    color: var(--blanco);
+}
+
+.valor-item p {
+    color: var(--gris-medio);
+    line-height: 1.6;
+}
+
+.imagen-quines-somos {
+    position: relative;
+}
+
+.imagen-quines-somos img {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: var(--sombra);
+}
+
+.experiencia-marca {
+    position: absolute;
+    bottom: -2rem;
+    right: -1rem;
+    background: var(--verde-neon);
+    color: var(--negro);
+    padding: 1.5rem;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: var(--sombra);
+}
+
+.numero-experiencia {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.texto-experiencia {
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Misión y Visión */
+.mision-vision {
+    background: var(--azul-noche);
+}
+
+.grid-mision-vision {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+}
+
+.card-mv {
+    background: var(--negro);
+    padding: 3rem;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: var(--sombra);
+    border: 1px solid var(--gris-oscuro);
+    transition: var(--transicion);
+}
+
+.card-mv:hover {
+    transform: translateY(-5px);
+    border-color: var(--verde-neon);
+}
+
+.icono-mv {
+    width: 80px;
+    height: 80px;
+    background: var(--verde-neon);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+}
+
+.icono-mv i {
+    font-size: 2rem;
+    color: var(--negro);
+}
+
+.card-mv h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--blanco);
+}
+
+.card-mv p {
+    color: var(--gris-medio);
+    line-height: 1.6;
+}
+
+/* Proceso */
+.proceso {
+    background: var(--negro);
+}
+
+.pasos-proceso {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.paso {
+    text-align: center;
+    padding: 2rem;
+    background: var(--azul-noche);
+    border-radius: 12px;
+    transition: var(--transicion);
+    border: 1px solid transparent;
+}
+
+.paso:hover {
+    border-color: var(--verde-neon);
+    transform: translateY(-3px);
+}
+
+.numero-paso {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--verde-neon);
+    margin-bottom: 1rem;
+    opacity: 0.7;
+}
+
+.paso h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: var(--blanco);
+}
+
+.paso p {
+    color: var(--gris-medio);
+    line-height: 1.6;
+}
+
+/* Equipo */
+.equipo {
+    background: var(--azul-noche);
+}
+
+.grid-equipo {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+    margin-top: 3rem;
+}
+
+.miembro-equipo {
+    text-align: center;
+    background: var(--negro);
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: var(--sombra);
+    transition: var(--transicion);
+    border: 1px solid transparent;
+}
+
+.miembro-equipo:hover {
+    border-color: var(--verde-neon);
+    transform: translateY(-5px);
+}
+
+.foto-miembro {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 1.5rem;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid var(--verde-neon);
+}
+
+.foto-miembro img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.miembro-equipo h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+    color: var(--blanco);
+}
+
+.cargo {
+    color: var(--verde-neon);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.descripcion-miembro {
+    color: var(--gris-medio);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.redes-miembro {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.redes-miembro a {
+    width: 40px;
+    height: 40px;
+    background: var(--gris-oscuro);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--blanco);
+    transition: var(--transicion);
+    text-decoration: none;
+}
+
+.redes-miembro a:hover {
+    background: var(--verde-neon);
+    color: var(--negro);
+    transform: scale(1.1);
+}
+
+/* Logros */
+.logros {
+    background: var(--negro);
+}
+
+.grid-logros {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.logro-item {
+    text-align: center;
+    padding: 2rem;
+    background: var(--azul-noche);
+    border-radius: 12px;
+    transition: var(--transicion);
+}
+
+.logro-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+.numero-logro {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--verde-neon);
+    margin-bottom: 0.5rem;
+}
+
+.logro-item p {
+    color: var(--gris-medio);
+    font-weight: 500;
+}
+
+/* CTA */
+.cta-nosotros {
+    background: linear-gradient(135deg, var(--verde-neon) 0%, var(--azul-noche) 100%);
+    text-align: center;
+    color: var(--blanco);
+}
+
+.cta-contenido h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.cta-contenido p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.cta-botones {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-nosotros h1 {
+        font-size: 2.5rem;
+    }
+    
+    .grid-quines-somos {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    
+    .grid-mision-vision {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .card-mv {
+        padding: 2rem;
+    }
+    
+    .pasos-proceso {
+        grid-template-columns: 1fr;
+    }
+    
+    .grid-equipo {
+        grid-template-columns: 1fr;
+    }
+    
+    .experiencia-marca {
+        position: static;
+        margin-top: 2rem;
+    }
+    
+    .cta-botones {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .cta-botones .btn {
+        width: 200px;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-nosotros {
+        padding: 6rem 0 3rem;
+    }
+    
+    .hero-nosotros h1 {
+        font-size: 2rem;
+    }
+    
+    .seccion {
+        padding: 3rem 0;
+    }
+    
+    .titulo-seccion {
+        font-size: 2rem;
+    }
+    
+    .valor-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .grid-logros {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .cta-contenido h2 {
+        font-size: 2rem;
+    }
+}

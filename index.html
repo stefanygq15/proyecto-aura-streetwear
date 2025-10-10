@@ -7,15 +7,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Khula:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="stylesheet" href="assets/css/home.css">  
+  <link rel="stylesheet" href="assets/css/index.css">
+
 </head>
 <body>
   <header class="header">
-    <div class="logo">
-      <a href="#">
-        <img src="https://via.placeholder.com/150x50/111111/00D084?text=AURA+STREETWEAR" alt="Aura Streetwear">
-      </a>
-    </div>
+<div class="logo">
+  <a href="index.html">
+    <h1 class="logo-text">AURA STREETWEAR</h1>
+  </a>
+</div>
     
     <nav class="nav">
       <ul class="nav-list">
@@ -23,14 +24,11 @@
         <li class="dropdown">
           <a href="#">Categorías <i class="fas fa-chevron-down"></i></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Hombres</a></li>
-            <li><a href="#">Mujeres</a></li>
-            <li><a href="#">Personalizadas</a></li>
-            <li><a href="#">Novedades</a></li>
+            <li><a href="catalogo-hombres.html">Hombres</a></li>
+            <li><a href="catalogo-mujeres.html">Mujeres</a></li>
           </ul>
         </li>
-        <li><a href="#">Nosotros</a></li>
-        <li><a href="#">Contacto</a></li>
+        <li><a href="nosotros.html">Nosotros</a></li>
       </ul>
     </nav>
     
@@ -38,24 +36,19 @@
       <a href="#" class="icono-header">
         <i class="fas fa-search"></i>
       </a>
-      <a href="#" class="icono-header">
+      <a href="login.html" class="icono-header">
         <i class="fas fa-user"></i>
       </a>
-      <a href="#" class="icono-header">
+      <a href="carrito.html" class="icono-header">
         <i class="fas fa-shopping-bag"></i>
         <span class="contador-carrito">3</span>
       </a>
     </div>
-    
-    <button class="menu-toggle">
-      <i class="fas fa-bars"></i>
-    </button>
   </header>
 
   <section class="hero">
-    <img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Nueva Colección Urbana" class="hero-img">
     <div class="hero-text">
-      <h1>Colección Urbana Octubre</h1>
+      <h1>Aura Streetwear</h1>
       <p>Descubre las nuevas tendencias en moda streetwear con diseños exclusivos y personalizados.</p>
       <a href="#" class="btn btn-primario">Ver colección <i class="fas fa-arrow-right"></i></a>
     </div>
@@ -68,7 +61,7 @@
         <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Hombres" class="categoria-img">
         <div class="categoria-overlay">
           <h3 class="categoria-titulo">Hombres</h3>
-          <a href="#" class="btn btn-secundario">Ver más</a>
+          <a href="catalogo-hombres.html" class="btn btn-secundario">Ver más</a>
         </div>
       </div>
       
@@ -76,7 +69,7 @@
         <img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Mujeres" class="categoria-img">
         <div class="categoria-overlay">
           <h3 class="categoria-titulo">Mujeres</h3>
-          <a href="#" class="btn btn-secundario">Ver más</a>
+          <a href="catalogo-mujeres.html" class="btn btn-secundario">Ver más</a>
         </div>
       </div>
       
@@ -89,7 +82,14 @@
       </div>
     </div>
   </section>
-
+<!-- <section class="hero">
+  <img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Nueva Colección Urbana" class="hero-img">
+  <div class="hero-text">
+    <h1>Colección Urbana Octubre</h1>
+    <p>Descubre las nuevas tendencias en moda streetwear con diseños exclusivos y personalizados.</p>
+    <a href="#" class="btn btn-primario">Ver colección <i class="fas fa-arrow-right"></i></a>
+  </div>
+</section> -->
   <section class="productos">
     <div class="contenedor">
       <h2>Productos Destacados</h2>
@@ -98,7 +98,6 @@
         <button class="filtro-btn activo">Todos</button>
         <button class="filtro-btn">Hombres</button>
         <button class="filtro-btn">Mujeres</button>
-        <button class="filtro-btn">Ofertas</button>
       </div>
       
       <div class="productos-grid">
@@ -217,18 +216,15 @@
         <div class="footer-col">
           <h3>Comprar</h3>
           <ul class="footer-links">
-            <li><a href="#">Hombres</a></li>
-            <li><a href="#">Mujeres</a></li>
-            <li><a href="#">Personalizadas</a></li>
-            <li><a href="#">Novedades</a></li>
-            <li><a href="#">Ofertas</a></li>
+            <li><a href="catalogo-hombres.html">Hombres</a></li>
+            <li><a href="catalogo-mujeres.html">Mujeres</a></li>
           </ul>
         </div>
         
         <div class="footer-col">
           <h3>Información</h3>
           <ul class="footer-links">
-            <li><a href="#">Sobre nosotros</a></li>
+            <li><a href="nosotros.html">Sobre nosotros</a></li>
             <li><a href="#">Preguntas frecuentes</a></li>
             <li><a href="#">Política de envíos</a></li>
             <li><a href="#">Devoluciones</a></li>
@@ -247,7 +243,7 @@
       </div>
       
       <div class="footer-bottom">
-        <p>&copy; 2023 Aura Streetwear. Todos los derechos reservados.</p>
+        <p>&copy; 2025 Aura Streetwear. Todos los derechos reservados.</p>
       </div>
     </div>
   </footer>
@@ -259,9 +255,17 @@
     
     const filtroBtns = document.querySelectorAll('.filtro-btn');
     filtroBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
+      btn.addEventListener('click', function() {
         filtroBtns.forEach(b => b.classList.remove('activo'));
-        btn.classList.add('activo');
+        this.classList.add('activo');
+      });
+    });
+    
+    const tallaBtns = document.querySelectorAll('.talla-btn');
+    tallaBtns.forEach(btn => {
+      btn.addEventListener('click', function() {
+        this.parentElement.querySelectorAll('.talla-btn').forEach(b => b.classList.remove('activa'));
+        this.classList.add('activa');
       });
     });
   </script>

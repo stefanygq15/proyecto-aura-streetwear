@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catálogo Hombres - Aura Streetwear</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Khula:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/catalogo.css">
+</head>
+<body>
+  <header class="header">
+<div class="logo">
+  <a href="index.html">
+    <h1 class="logo-text">AURA STREETWEAR</h1>
+  </a>
+</div>
+    
+    <nav class="nav">
+      <ul class="nav-list">
+        <li><a href="#">Inicio</a></li>
+        <li class="dropdown">
+          <a href="#">Categorías <i class="fas fa-chevron-down"></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="catalogo-hombres.html">Hombres</a></li>
+            <li><a href="catalogo-mujeres.html">Mujeres</a></li>
+          </ul>
+        </li>
+        <li><a href="nosotros.html">Nosotros</a></li>
+      </ul>
+    </nav>
+    
+    <div class="iconos-header">
+      <a href="#" class="icono-header">
+        <i class="fas fa-search"></i>
+      </a>
+      <a href="login.html" class="icono-header">
+        <i class="fas fa-user"></i>
+      </a>
+      <a href="carrito.html" class="icono-header">
+        <i class="fas fa-shopping-bag"></i>
+        <span class="contador-carrito">3</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="contenedor main-catalogo">
+    <div class="ruta">
+      <a href="index.html">Inicio</a> > <a href="catalogo.html">Catálogo</a> > <span>Hombres</span>
+    </div>
+    
+    <div class="cabecera-categoria">
+      <h1 class="titulo-pagina">Moda Masculina</h1>
+      <p class="descripcion-categoria">Descubre nuestra colección exclusiva para hombres. Diseños urbanos, cómodos y con estilo que definen tu personalidad.</p>
+    </div>
+    
+    <div class="filtros-catalogo">
+      <div class="filtro-grupo">
+        <h3>Filtrar por:</h3>
+        <div class="filtros-opciones">
+          <select class="filtro-select">
+            <option value="">Tipo de Prenda</option>
+            <option value="camisetas">Camisetas</option>
+            <option value="hoodies">Hoodies</option>
+            <option value="pantalones">Pantalones</option>
+            <option value="accesorios">Accesorios</option>
+          </select>
+          
+          <select class="filtro-select">
+            <option value="">Talla</option>
+            <option value="s">S</option>
+            <option value="m">M</option>
+            <option value="l">L</option>
+            <option value="xl">XL</option>
+            <option value="xxl">XXL</option>
+          </select>
+          
+          <select class="filtro-select">
+            <option value="">Color</option>
+            <option value="negro">Negro</option>
+            <option value="blanco">Blanco</option>
+            <option value="gris">Gris</option>
+            <option value="azul">Azul</option>
+            <option value="rojo">Rojo</option>
+            <option value="verde">Verde</option>
+          </select>
+          
+          <select class="filtro-select">
+            <option value="">Precio</option>
+            <option value="0-50">$0 - $50.000</option>
+            <option value="50-100">$50.000 - $100.000</option>
+            <option value="100-150">$100.000 - $150.000</option>
+            <option value="150+">Más de $150.000</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="ordenamiento">
+        <label for="ordenar">Ordenar por:</label>
+        <select id="ordenar" class="filtro-select">
+          <option value="novedad">Novedad</option>
+          <option value="precio-asc">Precio: Menor a Mayor</option>
+          <option value="precio-desc">Precio: Mayor a Menor</option>
+          <option value="popularidad">Popularidad</option>
+        </select>
+      </div>
+    </div>
+    
+    <div class="estadisticas-catalogo">
+      <div class="estadistica">
+        <span class="numero">24</span>
+        <span class="texto">Productos</span>
+      </div>
+      <div class="estadistica">
+        <span class="numero">8</span>
+        <span class="texto">Nuevos</span>
+      </div>
+      <div class="estadistica">
+        <span class="numero">6</span>
+        <span class="texto">En Oferta</span>
+      </div>
+    </div>
+    
+    <div class="grid-productos">
+      <!-- Producto 1 -->
+      <div class="producto-card">
+        <div class="producto-imagen-contenedor">
+          <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Camiseta Básica Negra" class="producto-imagen">
+          <div class="producto-badge nuevo">Nuevo</div>
+          <div class="producto-acciones">
+            <button class="accion-btn"><i class="far fa-heart"></i></button>
+            <button class="accion-btn"><i class="fas fa-search"></i></button>
+          </div>
+        </div>
+        <div class="producto-info">
+          <h3 class="producto-titulo">Camiseta Básica Negra</h3>
+          <p class="producto-precio">$59.000</p>
+          <div class="producto-tallas">
+            <button class="talla-btn">S</button>
+            <button class="talla-btn activa">M</button>
+            <button class="talla-btn">L</button>
+            <button class="talla-btn">XL</button>
+          </div>
+          <button class="btn-carrito">Añadir al carrito <i class="fas fa-shopping-bag"></i></button>
+        </div>
+      </div>
+      
+      <!-- Producto 2 -->
+      <div class="producto-card">
+        <div class="producto-imagen-contenedor">
+          <img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Hoodie Urban Gris" class="producto-imagen">
+          <div class="producto-badge oferta">-20%</div>
+          <div class="producto-acciones">
+            <button class="accion-btn"><i class="far fa-heart"></i></button>
+            <button class="accion-btn"><i class="fas fa-search"></i></button>
+          </div>
+        </div>
+        <div class="producto-info">
+          <h3 class="producto-titulo">Hoodie Urban Gris</h3>
+          <p class="producto-precio">
+            <span class="precio-original">$120.000</span>
+            $96.000
+          </p>
+          <div class="producto-tallas">
+            <button class="talla-btn">S</button>
+            <button class="talla-btn">M</button>
+            <button class="talla-btn activa">L</button>
+            <button class="talla-btn">XL</button>
+          </div>
+          <button class="btn-carrito">Añadir al carrito <i class="fas fa-shopping-bag"></i></button>
+        </div>
+      </div>
+      
+      <!-- Producto 3 -->
+      <div class="producto-card">
+        <div class="producto-imagen-contenedor">
+          <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Camiseta Manga Larga" class="producto-imagen">
+          <div class="producto-acciones">
+            <button class="accion-btn"><i class="far fa-heart"></i></button>
+            <button class="accion-btn"><i class="fas fa-search"></i></button>
+          </div>
+        </div>
+        <div class="producto-info">
+          <h3 class="producto-titulo">Camiseta Manga Larga</h3>
+          <p class="producto-precio">$75.000</p>
+          <div class="producto-tallas">
+            <button class="talla-btn">S</button>
+            <button class="talla-btn">M</button>
+            <button class="talla-btn">L</button>
+            <button class="talla-btn activa">XL</button>
+          </div>
+          <button class="btn-carrito">Añadir al carrito <i class="fas fa-shopping-bag"></i></button>
+        </div>
+      </div>
+      
+      <!-- Producto 4 -->
+      <div class="producto-card">
+        <div class="producto-imagen-contenedor">
+          <img src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Pantalón Cargo Negro" class="producto-imagen">
+          <div class="producto-badge nuevo">Nuevo</div>
+          <div class="producto-acciones">
+            <button class="accion-btn"><i class="far fa-heart"></i></button>
+            <button class="accion-btn"><i class="fas fa-search"></i></button>
+          </div>
+        </div>
+        <div class="producto-info">
+          <h3 class="producto-titulo">Pantalón Cargo Negro</h3>
+          <p class="producto-precio">$89.000</p>
+          <div class="producto-tallas">
+            <button class="talla-btn">28</button>
+            <button class="talla-btn">30</button>
+            <button class="talla-btn activa">32</button>
+            <button class="talla-btn">34</button>
+          </div>
+          <button class="btn-carrito">Añadir al carrito <i class="fas fa-shopping-bag"></i></button>
+        </div>
+      </div>
+      
+      <!-- Producto 5 -->
+      <div class="producto-card">
+        <div class="producto-imagen-contenedor">
+          <img src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Camiseta Estampada Street" class="producto-imagen">
+          <div class="producto-acciones">
+            <button class="accion-btn"><i class="far fa-heart"></i></button>
+            <button class="accion-btn"><i class="fas fa-search"></i></button>
+          </div>
+        </div>
+        <div class="producto-info">
+          <h3 class="producto-titulo">Camiseta Estampada Street</h3>
+          <p class="producto-precio">$68.000</p>
+          <div class="producto-tallas">
+            <button class="talla-btn">S</button>
+            <button class="talla-btn activa">M</button>
+            <button class="talla-btn">L</button>
+            <button class="talla-btn">XL</button>
+          </div>
+          <button class="btn-carrito">Añadir al carrito <i class="fas fa-shopping-bag"></i></button>
+        </div>
+      </div>
+      
+      <!-- Producto 6 -->
+      <div class="producto-card">
+        <div class="producto-imagen-contenedor">
+          <img src="https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Jacket Denim Azul" class="producto-imagen">
+          <div class="producto-badge oferta">-15%</div>
+          <div class="producto-acciones">
+            <button class="accion-btn"><i class="far fa-heart"></i></button>
+            <button class="accion-btn"><i class="fas fa-search"></i></button>
+          </div>
+        </div>
+        <div class="producto-info">
+          <h3 class="producto-titulo">Jacket Denim Azul</h3>
+          <p class="producto-precio">
+            <span class="precio-original">$140.000</span>
+            $119.000
+          </p>
+          <div class="producto-tallas">
+            <button class="talla-btn">S</button>
+            <button class="talla-btn">M</button>
+            <button class="talla-btn activa">L</button>
+            <button class="talla-btn">XL</button>
+          </div>
+          <button class="btn-carrito">Añadir al carrito <i class="fas fa-shopping-bag"></i></button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="paginacion">
+      <a href="#" class="pagina-activa">1</a>
+      <a href="#">2</a>
+      <a href="#">3</a>
+      <a href="#">4</a>
+      <a href="#">Siguiente <i class="fas fa-chevron-right"></i></a>
+    </div>
+    
+    <div class="categoria-info">
+      <div class="info-texto">
+        <h3>Moda Masculina con Actitud</h3>
+        <p>Nuestra colección para hombres está diseñada para quienes buscan comodidad sin sacrificar estilo. Desde camisetas básicas hasta hoodies y pants, cada pieza está creada con materiales de calidad y diseños que reflejan la esencia urbana.</p>
+        <ul>
+          <li>Materiales 100% algodón premium</li>
+          <li>Tallaje exacto para mejor ajuste</li>
+          <li>Diseños exclusivos y limitados</li>
+          <li>Producción sostenible</li>
+        </ul>
+      </div>
+      <div class="info-imagen">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Estilo Masculino">
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="contenedor">
+      <div class="footer-contenido">
+        <div class="footer-col">
+          <h3>Aura Streetwear</h3>
+          <p>Moda urbana con estilo y actitud. Diseños exclusivos para hombres y mujeres que quieren destacar.</p>
+          <div class="footer-redes">
+            <a href="#" class="red-social"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="red-social"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="red-social"><i class="fab fa-tiktok"></i></a>
+            <a href="#" class="red-social"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+        
+        <div class="footer-col">
+          <h3>Comprar</h3>
+          <ul class="footer-links">
+            <li><a href="catalogo-hombres.html">Hombres</a></li>
+            <li><a href="catalogo-mujeres.html">Mujeres</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-col">
+          <h3>Información</h3>
+          <ul class="footer-links">
+            <li><a href="nosotros.html">Sobre nosotros</a></li>
+            <li><a href="#">Preguntas frecuentes</a></li>
+            <li><a href="#">Política de envíos</a></li>
+            <li><a href="#">Devoluciones</a></li>
+            <li><a href="#">Términos y condiciones</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-col">
+          <h3>Contacto</h3>
+          <ul class="footer-links">
+            <li><i class="fas fa-map-marker-alt"></i> Bogotá, Colombia</li>
+            <li><i class="fas fa-phone"></i> +57 321 123 4567</li>
+            <li><i class="fas fa-envelope"></i> info@aurastreetwear.com</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2025 Aura Streetwear. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/catalogo.js"></script>
+</body>
+</html>

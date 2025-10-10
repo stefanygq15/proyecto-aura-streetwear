@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Perfil - Aura Streetwear</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Khula:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/perfil.css">
+</head>
+<body>
+  <header class="header">
+<div class="logo">
+  <a href="index.html">
+    <h1 class="logo-text">AURA STREETWEAR</h1>
+  </a>
+</div>
+    
+    <nav class="nav">
+      <ul class="nav-list">
+        <li><a href="#">Inicio</a></li>
+        <li class="dropdown">
+          <a href="#">Categorías <i class="fas fa-chevron-down"></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="catalogo-hombres.html">Hombres</a></li>
+            <li><a href="catalogo-mujeres.html">Mujeres</a></li>
+          </ul>
+        </li>
+        <li><a href="nosotros.html">Nosotros</a></li>
+      </ul>
+    </nav>
+    
+    <div class="iconos-header">
+      <a href="#" class="icono-header">
+        <i class="fas fa-search"></i>
+      </a>
+      <a href="login.html" class="icono-header">
+        <i class="fas fa-user"></i>
+      </a>
+      <a href="carrito.html" class="icono-header">
+        <i class="fas fa-shopping-bag"></i>
+        <span class="contador-carrito">3</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="main-perfil">
+    <div class="contenedor">
+      <div class="ruta">
+        <a href="index.html">Inicio</a> > <span>Mi Perfil</span>
+      </div>
+      
+      <div class="perfil-container">
+        <!-- Sidebar de navegación -->
+        <aside class="perfil-sidebar">
+          <div class="usuario-info">
+            <div class="avatar">
+              <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Usuario">
+              <button class="btn-cambiar-foto">
+                <i class="fas fa-camera"></i>
+              </button>
+            </div>
+            <h3>Juan Pérez</h3>
+            <p>juan.perez@email.com</p>
+            <div class="miembro-desde">
+              <i class="fas fa-calendar"></i>
+              Miembro desde Enero 2023
+            </div>
+          </div>
+          
+          <nav class="perfil-menu">
+            <a href="#informacion" class="menu-item activo">
+              <i class="fas fa-user"></i>
+              Información Personal
+            </a>
+            <a href="pedidos.html" class="menu-item">
+              <i class="fas fa-shopping-bag"></i>
+              Mis Pedidos
+            </a>
+            <a href="#direcciones" class="menu-item">
+              <i class="fas fa-map-marker-alt"></i>
+              Direcciones
+            </a>
+            <a href="#deseos" class="menu-item">
+              <i class="fas fa-heart"></i>
+              Lista de Deseos
+            </a>
+            <a href="#seguridad" class="menu-item">
+              <i class="fas fa-shield-alt"></i>
+              Seguridad
+            </a>
+            <a href="#notificaciones" class="menu-item">
+              <i class="fas fa-bell"></i>
+              Notificaciones
+            </a>
+            <a href="#" class="menu-item cerrar-sesion">
+              <i class="fas fa-sign-out-alt"></i>
+              Cerrar Sesión
+            </a>
+          </nav>
+        </aside>
+        
+        <!-- Contenido principal -->
+        <div class="perfil-contenido">
+          <!-- Sección Información Personal -->
+          <section id="informacion" class="seccion-perfil activo">
+            <h2>Información Personal</h2>
+            
+            <form class="form-perfil">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="nombre">Nombre</label>
+                  <input type="text" id="nombre" name="nombre" value="Juan" required>
+                </div>
+                
+                <div class="form-group">
+                  <label for="apellido">Apellido</label>
+                  <input type="text" id="apellido" name="apellido" value="Pérez" required>
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" value="juan.perez@email.com" required>
+              </div>
+              
+              <div class="form-group">
+                <label for="telefono">Teléfono</label>
+                <input type="tel" id="telefono" name="telefono" value="+57 321 123 4567">
+              </div>
+              
+              <div class="form-group">
+                <label for="fecha-nacimiento">Fecha de Nacimiento</label>
+                <input type="date" id="fecha-nacimiento" name="fecha-nacimiento" value="1990-05-15">
+              </div>
+              
+              <div class="form-group">
+                <label>Género</label>
+                <div class="radio-group">
+                  <label class="radio">
+                    <input type="radio" name="genero" value="masculino" checked>
+                    <span class="radiomark"></span>
+                    Masculino
+                  </label>
+                  <label class="radio">
+                    <input type="radio" name="genero" value="femenino">
+                    <span class="radiomark"></span>
+                    Femenino
+                  </label>
+                  <label class="radio">
+                    <input type="radio" name="genero" value="otro">
+                    <span class="radiomark"></span>
+                    Otro
+                  </label>
+                </div>
+              </div>
+              
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primario">Guardar Cambios</button>
+                <button type="button" class="btn btn-secundario">Cancelar</button>
+              </div>
+            </form>
+          </section>
+          
+          <!-- Otras secciones irían aquí -->
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="contenedor">
+      <div class="footer-contenido">
+        <div class="footer-col">
+          <h3>Aura Streetwear</h3>
+          <p>Moda urbana con estilo y actitud. Diseños exclusivos para hombres y mujeres que quieren destacar.</p>
+          <div class="footer-redes">
+            <a href="#" class="red-social"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="red-social"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="red-social"><i class="fab fa-tiktok"></i></a>
+            <a href="#" class="red-social"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+        
+        <div class="footer-col">
+          <h3>Comprar</h3>
+          <ul class="footer-links">
+            <li><a href="catalogo-hombres.html">Hombres</a></li>
+            <li><a href="catalogo-mujeres.html">Mujeres</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-col">
+          <h3>Información</h3>
+          <ul class="footer-links">
+            <li><a href="nosotros.html">Sobre nosotros</a></li>
+            <li><a href="#">Preguntas frecuentes</a></li>
+            <li><a href="#">Política de envíos</a></li>
+            <li><a href="#">Devoluciones</a></li>
+            <li><a href="#">Términos y condiciones</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-col">
+          <h3>Contacto</h3>
+          <ul class="footer-links">
+            <li><i class="fas fa-map-marker-alt"></i> Bogotá, Colombia</li>
+            <li><i class="fas fa-phone"></i> +57 321 123 4567</li>
+            <li><i class="fas fa-envelope"></i> info@aurastreetwear.com</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2025 Aura Streetwear. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/perfil.js"></script>
+</body>
+</html>

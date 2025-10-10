@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout - Aura Streetwear</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Khula:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/checkout.css">
+</head>
+<body>
+  <header class="header">
+<div class="logo">
+  <a href="index.html">
+    <h1 class="logo-text">AURA STREETWEAR</h1>
+  </a>
+</div>
+    
+    <nav class="nav">
+      <ul class="nav-list">
+        <li><a href="#">Inicio</a></li>
+        <li class="dropdown">
+          <a href="#">Categorías <i class="fas fa-chevron-down"></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="catalogo-hombres.html">Hombres</a></li>
+            <li><a href="catalogo-mujeres.html">Mujeres</a></li>
+          </ul>
+        </li>
+        <li><a href="nosotros.html">Nosotros</a></li>
+      </ul>
+    </nav>
+    
+    <div class="iconos-header">
+      <a href="#" class="icono-header">
+        <i class="fas fa-search"></i>
+      </a>
+      <a href="login.html" class="icono-header">
+        <i class="fas fa-user"></i>
+      </a>
+      <a href="carrito.html" class="icono-header">
+        <i class="fas fa-shopping-bag"></i>
+        <span class="contador-carrito">3</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="contenedor main-checkout">
+    <div class="ruta">
+      <a href="index.html">Inicio</a> > <a href="carrito.html">Carrito</a> > <span>Checkout</span>
+    </div>
+    
+    <h1 class="titulo-pagina">Finalizar Compra</h1>
+    
+    <div class="proceso-checkout">
+      <div class="pasos">
+        <div class="paso activo">
+          <span class="numero">1</span>
+          <span class="texto">Información</span>
+        </div>
+        <div class="paso">
+          <span class="numero">2</span>
+          <span class="texto">Envío</span>
+        </div>
+        <div class="paso">
+          <span class="numero">3</span>
+          <span class="texto">Pago</span>
+        </div>
+        <div class="paso">
+          <span class="numero">4</span>
+          <span class="texto">Confirmación</span>
+        </div>
+      </div>
+      
+      <div class="contenido-checkout">
+        <div class="formulario-checkout">
+          <form id="form-checkout">
+            <!-- Paso 1: Información -->
+            <div class="paso-contenido activo" id="paso-1">
+              <h2>Información Personal</h2>
+              
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="nombre">Nombre completo *</label>
+                  <input type="text" id="nombre" name="nombre" required>
+                </div>
+                
+                <div class="form-group">
+                  <label for="email">Email *</label>
+                  <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                  <label for="telefono">Teléfono *</label>
+                  <input type="tel" id="telefono" name="telefono" required>
+                </div>
+                
+                <div class="form-group">
+                  <label for="documento">Documento de identidad *</label>
+                  <input type="text" id="documento" name="documento" required>
+                </div>
+              </div>
+              
+              <div class="acciones-paso">
+                <button type="button" class="btn btn-primario" onclick="siguientePaso(2)">Continuar</button>
+              </div>
+            </div>
+            
+            <!-- Paso 2: Envío -->
+            <div class="paso-contenido" id="paso-2">
+              <h2>Información de Envío</h2>
+              
+              <div class="form-grid">
+                <div class="form-group full-width">
+                  <label for="direccion">Dirección *</label>
+                  <input type="text" id="direccion" name="direccion" required>
+                </div>
+                
+                <div class="form-group">
+                  <label for="ciudad">Ciudad *</label>
+                  <input type="text" id="ciudad" name="ciudad" required>
+                </div>
+                
+                <div class="form-group">
+                  <label for="departamento">Departamento *</label>
+                  <input type="text" id="departamento" name="departamento" required>
+                </div>
+                
+                <div class="form-group">
+                  <label for="codigo-postal">Código Postal</label>
+                  <input type="text" id="codigo-postal" name="codigo-postal">
+                </div>
+              </div>
+              
+              <div class="metodo-envio">
+                <h3>Método de envío</h3>
+                <div class="opciones-envio">
+                  <label class="opcion-envio">
+                    <input type="radio" name="envio" value="estandar" checked>
+                    <div class="opcion-contenido">
+                      <span class="titulo">Envío Estándar</span>
+                      <span class="precio">$8.000</span>
+                      <span class="tiempo">3-5 días hábiles</span>
+                    </div>
+                  </label>
+                  
+                  <label class="opcion-envio">
+                    <input type="radio" name="envio" value="express">
+                    <div class="opcion-contenido">
+                      <span class="titulo">Envío Express</span>
+                      <span class="precio">$15.000</span>
+                      <span class="tiempo">1-2 días hábiles</span>
+                    </div>
+                  </label>
+                </div>
+              </div>
+              
+              <div class="acciones-paso">
+                <button type="button" class="btn btn-secundario" onclick="anteriorPaso(1)">Atrás</button>
+                <button type="button" class="btn btn-primario" onclick="siguientePaso(3)">Continuar</button>
+              </div>
+            </div>
+            
+            <!-- Paso 3: Pago -->
+            <div class="paso-contenido" id="paso-3">
+              <h2>Método de Pago</h2>
+              
+              <div class="metodos-pago">
+                <div class="metodo-pago">
+                  <input type="radio" name="pago" id="tarjeta" value="tarjeta" checked>
+                  <label for="tarjeta">
+                    <i class="far fa-credit-card"></i>
+                    Tarjeta de Crédito/Débito
+                  </label>
+                </div>
+                
+                <div class="metodo-pago">
+                  <input type="radio" name="pago" id="pse" value="pse">
+                  <label for="pse">
+                    <i class="fas fa-university"></i>
+                    PSE
+                  </label>
+                </div>
+                
+                <div class="metodo-pago">
+                  <input type="radio" name="pago" id="nequi" value="nequi">
+                  <label for="nequi">
+                    <i class="fas fa-mobile-alt"></i>
+                    Nequi
+                  </label>
+                </div>
+              </div>
+              
+              <div class="info-tarjeta" id="info-tarjeta">
+                <div class="form-grid">
+                  <div class="form-group full-width">
+                    <label for="numero-tarjeta">Número de tarjeta *</label>
+                    <input type="text" id="numero-tarjeta" name="numero-tarjeta" placeholder="1234 5678 9012 3456">
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="fecha-vencimiento">Fecha de vencimiento *</label>
+                    <input type="text" id="fecha-vencimiento" name="fecha-vencimiento" placeholder="MM/AA">
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="cvv">CVV *</label>
+                    <input type="text" id="cvv" name="cvv" placeholder="123">
+                  </div>
+                  
+                  <div class="form-group full-width">
+                    <label for="nombre-tarjeta">Nombre en la tarjeta *</label>
+                    <input type="text" id="nombre-tarjeta" name="nombre-tarjeta">
+                  </div>
+                </div>
+              </div>
+              
+              <div class="terminos">
+                <label class="checkbox">
+                  <input type="checkbox" id="terminos" required>
+                  <span class="checkmark"></span>
+                  Acepto los <a href="politicas.html">términos y condiciones</a> y la <a href="politicas.html">política de privacidad</a>
+                </label>
+              </div>
+              
+              <div class="acciones-paso">
+                <button type="button" class="btn btn-secundario" onclick="anteriorPaso(2)">Atrás</button>
+                <button type="submit" class="btn btn-primario">Pagar Ahora</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        
+        <div class="resumen-checkout">
+          <h3>Resumen del Pedido</h3>
+          <div class="items-resumen">
+            <!-- Items del resumen -->
+          </div>
+          <div class="total-resumen">
+            <div class="linea-total">
+              <span>Subtotal</span>
+              <span>$177.000</span>
+            </div>
+            <div class="linea-total">
+              <span>Envío</span>
+              <span>$8.000</span>
+            </div>
+            <div class="linea-total">
+              <span>Descuento</span>
+              <span class="descuento">-$10.000</span>
+            </div>
+            <div class="linea-total total">
+              <span>Total</span>
+              <span>$175.000</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="contenedor">
+      <div class="footer-contenido">
+        <div class="footer-col">
+          <h3>Aura Streetwear</h3>
+          <p>Moda urbana con estilo y actitud. Diseños exclusivos para hombres y mujeres que quieren destacar.</p>
+          <div class="footer-redes">
+            <a href="#" class="red-social"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="red-social"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="red-social"><i class="fab fa-tiktok"></i></a>
+            <a href="#" class="red-social"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+        
+        <div class="footer-col">
+          <h3>Comprar</h3>
+          <ul class="footer-links">
+            <li><a href="catalogo-hombres.html">Hombres</a></li>
+            <li><a href="catalogo-mujeres.html">Mujeres</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-col">
+          <h3>Información</h3>
+          <ul class="footer-links">
+            <li><a href="nosotros.html">Sobre nosotros</a></li>
+            <li><a href="#">Preguntas frecuentes</a></li>
+            <li><a href="#">Política de envíos</a></li>
+            <li><a href="#">Devoluciones</a></li>
+            <li><a href="#">Términos y condiciones</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-col">
+          <h3>Contacto</h3>
+          <ul class="footer-links">
+            <li><i class="fas fa-map-marker-alt"></i> Bogotá, Colombia</li>
+            <li><i class="fas fa-phone"></i> +57 321 123 4567</li>
+            <li><i class="fas fa-envelope"></i> info@aurastreetwear.com</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2025 Aura Streetwear. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/checkout.js"></script>
+</body>
+</html>
