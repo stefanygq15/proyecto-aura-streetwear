@@ -8,23 +8,27 @@
   <link rel="stylesheet" href="assets/css/index.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Khula:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  
-
 </head>
 <body>
+
+  <!-- Botón de alto contraste - SOLO EN INDEX -->
+  <button id="contrastToggle" class="contrast-toggle" aria-label="Activar modo alto contraste" title="Activar modo alto contraste">
+    <i class="fas fa-adjust"></i>
+  </button>
+
   <header class="header">
-<div class="logo">
-  <a href="index.html">
-    <h1 class="logo-text">AURA STREETWEAR</h1>
-  </a>
-</div>
+    <div class="logo">
+      <a href="index.html">
+        <h1 class="logo-text">AURA STREETWEAR</h1>
+      </a>
+    </div>
     
-    <nav class="nav">
+    <nav class="nav" aria-label="Navegación principal">
       <ul class="nav-list">
-        <li><a href="#">Inicio</a></li>
+        <li><a href="index.html">Inicio</a></li>
         <li class="dropdown">
-          <a href="#">Categorías <i class="fas fa-chevron-down"></i></a>
-          <ul class="dropdown-menu">
+          <a href="#" aria-haspopup="true" aria-expanded="false">Categorías <i class="fas fa-chevron-down"></i></a>
+          <ul class="dropdown-menu" role="menu">
             <li><a href="catalogo-hombres.html">Hombres</a></li>
             <li><a href="catalogo-mujeres.html">Mujeres</a></li>
           </ul>
@@ -34,183 +38,178 @@
     </nav>
     
     <div class="iconos-header">
-      <a href="#" class="icono-header">
+      <a href="#" class="icono-header" aria-label="Buscar productos">
         <i class="fas fa-search"></i>
       </a>
-      <a href="login.html" class="icono-header">
+      <a href="login.html" class="icono-header" aria-label="Iniciar sesión">
         <i class="fas fa-user"></i>
       </a>
-      <a href="carrito.html" class="icono-header">
+      <a href="carrito.html" class="icono-header" aria-label="Carrito de compras, 3 items">
         <i class="fas fa-shopping-bag"></i>
         <span class="contador-carrito">3</span>
       </a>
     </div>
   </header>
 
-  <section class="hero">
-    <div class="hero-text">
-      <h1>Aura Streetwear</h1>
-      <p>Descubre las nuevas tendencias en moda streetwear con diseños exclusivos y personalizados.</p>
-      <a href="#" class="btn btn-primario">Ver colección <i class="fas fa-arrow-right"></i></a>
-    </div>
-  </section>
+  <main id="main-content">
+    <section class="hero">
+      <div class="hero-text">
+        <h1>Aura Streetwear</h1>
+        <p>Descubre las nuevas tendencias en moda streetwear con diseños exclusivos y personalizados.</p>
+        <a href="#" class="btn btn-primario">Ver colección <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </section>
 
-  <section class="colecciones contenedor">
-    <h2>Nuestras Colecciones</h2>
-    <div class="categorias-grid">
-      <div class="categoria-card">
-        <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Hombres" class="categoria-img">
-        <div class="categoria-overlay">
-          <h3 class="categoria-titulo">Hombres</h3>
-          <a href="catalogo-hombres.html" class="btn btn-secundario">Ver más</a>
-        </div>
-      </div>
-      
-      <div class="categoria-card">
-        <img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Mujeres" class="categoria-img">
-        <div class="categoria-overlay">
-          <h3 class="categoria-titulo">Mujeres</h3>
-          <a href="catalogo-mujeres.html" class="btn btn-secundario">Ver más</a>
-        </div>
-      </div>
-      
-      <div class="categoria-card">
-        <img src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Personalizadas" class="categoria-img">
-        <div class="categoria-overlay">
-          <h3 class="categoria-titulo">Personalizadas</h3>
-          <a href="#" class="btn btn-secundario">Ver más</a>
-        </div>
-      </div>
-    </div>
-  </section>
-<!-- <section class="hero">
-  <img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Nueva Colección Urbana" class="hero-img">
-  <div class="hero-text">
-    <h1>Colección Urbana Octubre</h1>
-    <p>Descubre las nuevas tendencias en moda streetwear con diseños exclusivos y personalizados.</p>
-    <a href="#" class="btn btn-primario">Ver colección <i class="fas fa-arrow-right"></i></a>
-  </div>
-</section> -->
-  <section class="productos">
-    <div class="contenedor">
-      <h2>Productos Destacados</h2>
-      
-      <div class="filtros">
-        <button class="filtro-btn activo">Todos</button>
-        <button class="filtro-btn">Hombres</button>
-        <button class="filtro-btn">Mujeres</button>
-      </div>
-      
-      <div class="productos-grid">
-        <div class="producto-card">
-          <div class="producto-imagen-contenedor">
-            <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Camiseta Básica Negra" class="producto-imagen">
-            <div class="producto-acciones">
-              <button class="accion-btn"><i class="far fa-heart"></i></button>
-              <button class="accion-btn"><i class="fas fa-search"></i></button>
-            </div>
-          </div>
-          <div class="producto-info">
-            <h3 class="producto-titulo">Camiseta Básica Negra</h3>
-            <p class="producto-precio">$59.000</p>
-            <div class="producto-tallas">
-              <button class="talla-btn">S</button>
-              <button class="talla-btn activa">M</button>
-              <button class="talla-btn">L</button>
-              <button class="talla-btn">XL</button>
-            </div>
-            <button class="btn-carrito">Añadir al carrito <i class="fas fa-shopping-bag"></i></button>
+    <section class="colecciones contenedor">
+      <h2>Nuestras Colecciones</h2>
+      <div class="categorias-grid">
+        <div class="categoria-card">
+          <img src="assets/images/cam1-h.png" alt="Modelo masculino usando camiseta streetwear básica color negro" class="categoria-img">
+          <div class="categoria-overlay">
+            <h3 class="categoria-titulo">Hombres</h3>
+            <a href="catalogo-hombres.html" class="btn btn-secundario">Ver más</a>
           </div>
         </div>
         
-        <div class="producto-card">
-          <div class="producto-imagen-contenedor">
-            <img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Camiseta Oversize Gris" class="producto-imagen">
-            <div class="producto-acciones">
-              <button class="accion-btn"><i class="far fa-heart"></i></button>
-              <button class="accion-btn"><i class="fas fa-search"></i></button>
-            </div>
-          </div>
-          <div class="producto-info">
-            <h3 class="producto-titulo">Camiseta Oversize Gris</h3>
-            <p class="producto-precio">$65.000</p>
-            <div class="producto-tallas">
-              <button class="talla-btn">S</button>
-              <button class="talla-btn">M</button>
-              <button class="talla-btn activa">L</button>
-              <button class="talla-btn">XL</button>
-            </div>
-            <button class="btn-carrito">Añadir al carrito <i class="fas fa-shopping-bag"></i></button>
+        <div class="categoria-card">
+          <img src="assets/images/cam1-m.png" alt="Modelo femenina usando camiseta streetwear oversize color gris" class="categoria-img">
+          <div class="categoria-overlay">
+            <h3 class="categoria-titulo">Mujeres</h3>
+            <a href="catalogo-mujeres.html" class="btn btn-secundario">Ver más</a>
           </div>
         </div>
         
-        <div class="producto-card">
-          <div class="producto-imagen-contenedor">
-            <img src="https://images.unsplash.com/photo-1503341504253-dff4815485f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Camiseta Estampada" class="producto-imagen">
-            <div class="producto-acciones">
-              <button class="accion-btn"><i class="far fa-heart"></i></button>
-              <button class="accion-btn"><i class="fas fa-search"></i></button>
-            </div>
-          </div>
-          <div class="producto-info">
-            <h3 class="producto-titulo">Camiseta Estampada</h3>
-            <p class="producto-precio">$72.000</p>
-            <div class="producto-tallas">
-              <button class="talla-btn">S</button>
-              <button class="talla-btn">M</button>
-              <button class="talla-btn">L</button>
-              <button class="talla-btn activa">XL</button>
-            </div>
-            <button class="btn-carrito">Añadir al carrito <i class="fas fa-shopping-bag"></i></button>
-          </div>
-        </div>
-        
-        <div class="producto-card">
-          <div class="producto-imagen-contenedor">
-            <img src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Camiseta Personalizada" class="producto-imagen">
-            <div class="producto-acciones">
-              <button class="accion-btn"><i class="far fa-heart"></i></button>
-              <button class="accion-btn"><i class="fas fa-search"></i></button>
-            </div>
-          </div>
-          <div class="producto-info">
-            <h3 class="producto-titulo">Camiseta Personalizada</h3>
-            <p class="producto-precio">$85.000</p>
-            <div class="producto-tallas">
-              <button class="talla-btn activa">S</button>
-              <button class="talla-btn">M</button>
-              <button class="talla-btn">L</button>
-              <button class="talla-btn">XL</button>
-            </div>
-            <button class="btn-carrito">Añadir al carrito <i class="fas fa-shopping-bag"></i></button>
+        <div class="categoria-card">
+          <img src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Diseños personalizados de camisetas streetwear con estampados únicos" class="categoria-img">
+          <div class="categoria-overlay">
+            <h3 class="categoria-titulo">Personalizadas</h3>
+            <a href="#" class="btn btn-secundario">Ver más</a>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="newsletter">
-    <div class="contenedor">
-      <h2>Únete a nuestra comunidad</h2>
-      <p>Suscríbete para recibir las últimas novedades, lanzamientos exclusivos y descuentos especiales.</p>
-      <form class="form-newsletter">
-        <input type="email" placeholder="Tu correo electrónico" class="input-newsletter" required>
-        <button type="submit" class="btn btn-newsletter">Suscribirse</button>
-      </form>
-    </div>
-  </section>
+    <section class="productos">
+      <div class="contenedor">
+        <h2>Productos Destacados</h2>
+        
+        <div class="filtros" role="tablist" aria-label="Filtrar productos por categoría">
+          <button class="filtro-btn activo" role="tab" aria-selected="true" aria-controls="todos-productos">Todos</button>
+          <button class="filtro-btn" role="tab" aria-selected="false" aria-controls="hombres-productos">Hombres</button>
+          <button class="filtro-btn" role="tab" aria-selected="false" aria-controls="mujeres-productos">Mujeres</button>
+        </div>
+        
+        <div class="productos-grid">
+          <div class="producto-card" role="article" aria-labelledby="producto-1">
+            <div class="producto-imagen-contenedor">
+              <img src="assets/images/cam3-h.png" alt="Camiseta básica color gris para hombre, corte regular" class="producto-imagen">
+              <div class="producto-acciones">
+                <button class="accion-btn" aria-label="Agregar a favoritos"><i class="far fa-heart"></i></button>
+                <button class="accion-btn" aria-label="Ver detalles del producto"><i class="fas fa-search"></i></button>
+              </div>
+            </div>
+            <div class="producto-info">
+              <h3 class="producto-titulo" id="producto-1">Camiseta Básica Gris</h3>
+              <p class="producto-precio">$59.000</p>
+              <div class="producto-tallas" role="group" aria-label="Seleccionar talla">
+                <button class="talla-btn" aria-pressed="false">S</button>
+                <button class="talla-btn activa" aria-pressed="true">M</button>
+                <button class="talla-btn" aria-pressed="false">L</button>
+                <button class="talla-btn" aria-pressed="false">XL</button>
+              </div>
+              <button class="btn-carrito">Añadir al carrito <i class="fas fa-shopping-bag"></i></button>
+            </div>
+          </div>
+          
+          <div class="producto-card" role="article" aria-labelledby="producto-2">
+            <div class="producto-imagen-contenedor">
+              <img src="assets/images/pan2-h.png" alt="Sudadera ajustada color negro para hombre, con capucha" class="producto-imagen">
+              <div class="producto-acciones">
+                <button class="accion-btn" aria-label="Agregar a favoritos"><i class="far fa-heart"></i></button>
+                <button class="accion-btn" aria-label="Ver detalles del producto"><i class="fas fa-search"></i></button>
+              </div>
+            </div>
+            <div class="producto-info">
+              <h3 class="producto-titulo" id="producto-2">Sudadera Ajustada Negra</h3>
+              <p class="producto-precio">$65.000</p>
+              <div class="producto-tallas" role="group" aria-label="Seleccionar talla">
+                <button class="talla-btn" aria-pressed="false">S</button>
+                <button class="talla-btn" aria-pressed="false">M</button>
+                <button class="talla-btn activa" aria-pressed="true">L</button>
+                <button class="talla-btn" aria-pressed="false">XL</button>
+              </div>
+              <button class="btn-carrito">Añadir al carrito <i class="fas fa-shopping-bag"></i></button>
+            </div>
+          </div>
+          
+          <div class="producto-card" role="article" aria-labelledby="producto-3">
+            <div class="producto-imagen-contenedor">
+              <img src="assets/images/pan3-m.png" alt="Jean azul de corte ancho para mujer, estilo streetwear" class="producto-imagen">
+              <div class="producto-acciones">
+                <button class="accion-btn" aria-label="Agregar a favoritos"><i class="far fa-heart"></i></button>
+                <button class="accion-btn" aria-label="Ver detalles del producto"><i class="fas fa-search"></i></button>
+              </div>
+            </div>
+            <div class="producto-info">
+              <h3 class="producto-titulo" id="producto-3">Jean Azul Ancho</h3>
+              <p class="producto-precio">$72.000</p>
+              <div class="producto-tallas" role="group" aria-label="Seleccionar talla">
+                <button class="talla-btn" aria-pressed="false">S</button>
+                <button class="talla-btn" aria-pressed="false">M</button>
+                <button class="talla-btn" aria-pressed="false">L</button>
+                <button class="talla-btn activa" aria-pressed="true">XL</button>
+              </div>
+              <button class="btn-carrito">Añadir al carrito <i class="fas fa-shopping-bag"></i></button>
+            </div>
+          </div>
+          
+          <div class="producto-card" role="article" aria-labelledby="producto-4">
+            <div class="producto-imagen-contenedor">
+              <img src="assets/images/pan2-m.png" alt="Sudadera ancha color negro para mujer, estilo oversize" class="producto-imagen">
+              <div class="producto-acciones">
+                <button class="accion-btn" aria-label="Agregar a favoritos"><i class="far fa-heart"></i></button>
+                <button class="accion-btn" aria-label="Ver detalles del producto"><i class="fas fa-search"></i></button>
+              </div>
+            </div>
+            <div class="producto-info">
+              <h3 class="producto-titulo" id="producto-4">Sudadera Ancha Negra</h3>
+              <p class="producto-precio">$85.000</p>
+              <div class="producto-tallas" role="group" aria-label="Seleccionar talla">
+                <button class="talla-btn activa" aria-pressed="true">S</button>
+                <button class="talla-btn" aria-pressed="false">M</button>
+                <button class="talla-btn" aria-pressed="false">L</button>
+                <button class="talla-btn" aria-pressed="false">XL</button>
+              </div>
+              <button class="btn-carrito">Añadir al carrito <i class="fas fa-shopping-bag"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <footer class="footer">
+    <section class="newsletter">
+      <div class="contenedor">
+        <h2>Únete a nuestra comunidad</h2>
+        <p>Suscríbete para recibir las últimas novedades, lanzamientos exclusivos y descuentos especiales.</p>
+        <form class="form-newsletter">
+          <input type="email" placeholder="Tu correo electrónico" class="input-newsletter" required aria-label="Ingresa tu correo electrónico para suscribirte">
+          <button type="submit" class="btn btn-newsletter">Suscribirse</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
     <div class="contenedor">
       <div class="footer-contenido">
         <div class="footer-col">
           <h3>Aura Streetwear</h3>
           <p>Moda urbana con estilo y actitud. Diseños exclusivos para hombres y mujeres que quieren destacar.</p>
           <div class="footer-redes">
-            <a href="#" class="red-social"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" class="red-social"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="red-social"><i class="fab fa-tiktok"></i></a>
-            <a href="#" class="red-social"><i class="fab fa-whatsapp"></i></a>
+            <a href="#" class="red-social" aria-label="Síguenos en Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="red-social" aria-label="Síguenos en Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="red-social" aria-label="Síguenos en TikTok"><i class="fab fa-tiktok"></i></a>
+            <a href="#" class="red-social" aria-label="Contáctanos por WhatsApp"><i class="fab fa-whatsapp"></i></a>
           </div>
         </div>
         
@@ -250,23 +249,86 @@
   </footer>
 
   <script>
-    document.querySelector('.menu-toggle').addEventListener('click', function() {
-      document.querySelector('.nav').classList.toggle('active');
-    });
-    
+    // Menu toggle
+    const menuToggle = document.querySelector('.menu-toggle');
+    if (menuToggle) {
+      menuToggle.addEventListener('click', function() {
+        document.querySelector('.nav').classList.toggle('active');
+      });
+    }
+
+    // Filtros de productos
     const filtroBtns = document.querySelectorAll('.filtro-btn');
     filtroBtns.forEach(btn => {
       btn.addEventListener('click', function() {
-        filtroBtns.forEach(b => b.classList.remove('activo'));
+        filtroBtns.forEach(b => {
+          b.classList.remove('activo');
+          b.setAttribute('aria-selected', 'false');
+        });
         this.classList.add('activo');
+        this.setAttribute('aria-selected', 'true');
       });
     });
-    
+
+    // Selección de tallas
     const tallaBtns = document.querySelectorAll('.talla-btn');
     tallaBtns.forEach(btn => {
       btn.addEventListener('click', function() {
-        this.parentElement.querySelectorAll('.talla-btn').forEach(b => b.classList.remove('activa'));
+        this.parentElement.querySelectorAll('.talla-btn').forEach(b => {
+          b.classList.remove('activa');
+          b.setAttribute('aria-pressed', 'false');
+        });
         this.classList.add('activa');
+        this.setAttribute('aria-pressed', 'true');
+      });
+    });
+
+    // MODO ALTO CONTRASTE - SOLO PARA INDEX
+    const contrastToggle = document.getElementById('contrastToggle');
+    if (contrastToggle) {
+      // Cargar estado al iniciar
+      if (localStorage.getItem('altoContraste') === 'true') {
+        document.body.classList.add('alto-contraste');
+        const icon = contrastToggle.querySelector('i');
+        icon.className = 'fas fa-sun';
+        contrastToggle.setAttribute('aria-label', 'Desactivar modo alto contraste');
+        contrastToggle.title = 'Desactivar modo alto contraste';
+      }
+
+      // Evento para cambiar modo
+      contrastToggle.addEventListener('click', function() {
+        document.body.classList.toggle('alto-contraste');
+        
+        // Cambiar icono y texto accesible
+        const icon = this.querySelector('i');
+        if (document.body.classList.contains('alto-contraste')) {
+          icon.className = 'fas fa-sun';
+          this.setAttribute('aria-label', 'Desactivar modo alto contraste');
+          this.title = 'Desactivar modo alto contraste';
+          // Guardar preferencia
+          localStorage.setItem('altoContraste', 'true');
+        } else {
+          icon.className = 'fas fa-adjust';
+          this.setAttribute('aria-label', 'Activar modo alto contraste');
+          this.title = 'Activar modo alto contraste';
+          // Remover preferencia
+          localStorage.removeItem('altoContraste');
+        }
+      });
+    }
+
+    // Navegación por teclado en dropdowns
+    document.querySelectorAll('.dropdown').forEach(dropdown => {
+      const trigger = dropdown.querySelector('a');
+      const menu = dropdown.querySelector('.dropdown-menu');
+      
+      trigger.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          const isExpanded = this.getAttribute('aria-expanded') === 'true';
+          this.setAttribute('aria-expanded', !isExpanded);
+          menu.style.display = isExpanded ? 'none' : 'block';
+        }
       });
     });
   </script>
