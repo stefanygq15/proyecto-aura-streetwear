@@ -1,5 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Tabs functionality
+    if (localStorage.getItem('altoContraste') === 'true') {
+    document.body.classList.add('alto-contraste');
+  }
     const tabBtns = document.querySelectorAll('.tab-btn');
     const tabContents = document.querySelectorAll('.tab-content');
     

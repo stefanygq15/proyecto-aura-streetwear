@@ -1,5 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Filtros funcionales
+    if (localStorage.getItem('altoContraste') === 'true') {
+    document.body.classList.add('alto-contraste');
+  }
     const filtroSelects = document.querySelectorAll('.filtro-select');
     
     filtroSelects.forEach(select => {

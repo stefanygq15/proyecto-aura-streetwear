@@ -1,5 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Animación de contadores para logros
+    if (localStorage.getItem('altoContraste') === 'true') {
+    document.body.classList.add('alto-contraste');
+  }
     function animarContadores() {
         const contadores = document.querySelectorAll('.numero-logro');
         const velocidad = 2000; // Duración en milisegundos

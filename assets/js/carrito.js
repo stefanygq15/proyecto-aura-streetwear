@@ -72,6 +72,9 @@ function irACheckout() {
 
 // Inicializar
 document.addEventListener('DOMContentLoaded', function() {
+    if (localStorage.getItem('altoContraste') === 'true') {
+    document.body.classList.add('alto-contraste');
+  }
     actualizarResumen();
     verificarCarritoVacio();
 });
