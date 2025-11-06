@@ -1,5 +1,15 @@
 // Capa de datos: intenta Supabase, luego JSON local, luego fallback embebido
 (function(){
+  async function fetchFromPhp(params={}){
+    const qp = new URLSearchParams();
+    if (params.gender) qp.set('gender', params.gender);
+    if (params.search) qp.set('search', params.search);
+    if (params.limit) qp.set('limit', params.limit);
+    const res = await fetch('api/products.php?' + qp.toString());
+    if (!res.ok) throw new Error('php-fetch-failed');
+    return await res.json();
+  }
+
   async function fetchFromSupabase(params={}){
     const cfg = (window.SUPABASE||{});
     if (!cfg.URL || !cfg.ANON_KEY) throw new Error('supabase-config-missing');
@@ -31,6 +41,9 @@
   }
 
   async function fetchProducts(params={}){
+    // 1) PHP API
+    try { return await fetchFromPhp(params); } catch(e) {}
+    // 2) Supabase (opcional)
     try { return await fetchFromSupabase(params); } catch(e) {}
     try { return await fetchFromJson(params); } catch(e) {}
     let items = (window.PRODUCTS_FALLBACK||[]);
