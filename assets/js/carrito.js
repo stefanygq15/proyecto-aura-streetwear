@@ -34,6 +34,7 @@ function renderCarritoPagina(){
     });
   }
   actualizarResumenPagina();
+  if (window.updateCartBadge) window.updateCartBadge();
 }
 
 function actualizarResumenPagina(){
@@ -80,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () =>{
     }
   });
   const vaciar = document.getElementById('vaciar-carrito');
-  if (vaciar){ vaciar.onclick = () => { if (window.AuraCart){ window.AuraCart.clear(); renderCarritoPagina(); } } }
+  if (vaciar){ vaciar.onclick = () => { if (window.AuraCart){ window.AuraCart.clear(); renderCarritoPagina(); if (window.updateCartBadge) window.updateCartBadge(); } } }
 });
 
 // Animación CSS (slideOut reutilizable)

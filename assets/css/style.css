@@ -315,6 +315,12 @@ button {
 .overlay-search-input::placeholder{ color:#e5e5e5; opacity:.7; }
 .overlay-search-btn{ width:42px; height:42px; border:none; border-radius:6px; background:#45484d; color:#fff; }
 .overlay-search-btn:hover{ background:#3f4246; }
+/* Sugerencias de búsqueda en vivo */
+.overlay-suggest{ position:absolute; left:0; right:0; top:100%; background:#5a5d62; border:1px solid rgba(255,255,255,.12); border-radius:0 0 6px 6px; box-shadow:0 14px 24px rgba(0,0,0,.5); z-index:130; display:none; max-height:300px; overflow:auto; }
+.overlay-suggest.open{ display:block; }
+.overlay-suggest-item{ display:flex; align-items:center; gap:.6rem; padding:.6rem .8rem; cursor:pointer; }
+.overlay-suggest-item:hover{ background:rgba(0,0,0,.12); }
+.overlay-suggest-item img{ width:36px; height:36px; object-fit:cover; border-radius:4px; }
 
 /* Drawer Carrito */
 .cart-drawer {

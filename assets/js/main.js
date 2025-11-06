@@ -120,6 +120,8 @@
     if (badge) badge.textContent = Cart.count();
   };
   updateBadge();
+  // Exponer para que otras páginas (carrito/checkout) lo usen
+  window.updateCartBadge = updateBadge;
 
   // Evitar que clicks internos al drawer lo cierren por el handler global
   if (cart) {
@@ -154,6 +156,48 @@
       window.location.href = url;
     });
   }
+
+  // Sugerencias en tiempo real en el menú hamburguesa
+  (function(){
+    if (!overlaySearchInput) return;
+    // contenedor de sugerencias
+    let suggest = document.getElementById('overlaySuggest');
+    if (!suggest){
+      suggest = document.createElement('div');
+      suggest.id = 'overlaySuggest';
+      suggest.className = 'overlay-suggest';
+      // insertar después del bloque de búsqueda
+      const parent = document.querySelector('.overlay-search');
+      if (parent) parent.appendChild(suggest);
+    }
+    let lastQ = '';
+    async function doSuggest(q){
+      if (!q || q.length < 2){ suggest.classList.remove('open'); suggest.innerHTML = ''; return; }
+      try{
+        let items = [];
+        if (window.fetchProducts) items = await window.fetchProducts({ search: q });
+        if (!items || !items.length) { suggest.classList.remove('open'); suggest.innerHTML=''; return; }
+        suggest.innerHTML = items.slice(0,8).map(p=>
+          `<div class="overlay-suggest-item" data-q="${p.title}">
+            <img src="${p.image||''}" alt="${p.title}">
+            <div style="flex:1">${p.title}</div>
+            <div>$${(p.price||0).toLocaleString()}</div>
+          </div>`).join('');
+        suggest.classList.add('open');
+      }catch(e){ suggest.classList.remove('open'); }
+    }
+    overlaySearchInput.addEventListener('input', (e)=>{
+      const q = e.target.value.trim();
+      if (q === lastQ) return; lastQ = q; doSuggest(q);
+    });
+    suggest.addEventListener('click', (e)=>{
+      const item = e.target.closest('.overlay-suggest-item');
+      if (!item) return;
+      const q = item.getAttribute('data-q');
+      window.location.href = `coleccion.html?search=${encodeURIComponent(q)}`;
+    });
+    document.addEventListener('keydown', (e)=>{ if (e.key==='Escape') suggest.classList.remove('open'); });
+  })();
 
   // Render contenido del drawer
   function renderCartDrawer() {

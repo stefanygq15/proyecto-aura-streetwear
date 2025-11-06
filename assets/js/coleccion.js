@@ -26,8 +26,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         <h3 class="producto-titulo">${p.title}</h3>
         <p class="producto-precio">${currency(p.price)}</p>
         <div class="producto-tallas">
+          <button class="talla-btn">S</button>
           <button class="talla-btn activa">M</button>
           <button class="talla-btn">L</button>
+          <button class="talla-btn">XL</button>
+          <button class="talla-btn">XXL</button>
         </div>
         <button class="btn-carrito" data-title="${p.title}" data-price="${p.price}" data-image="${p.image}">Añadir al carrito <i class="fas fa-shopping-bag"></i></button>
       </div>

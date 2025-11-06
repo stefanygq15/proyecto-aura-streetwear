@@ -20,15 +20,14 @@ document.addEventListener('DOMContentLoaded', function() {
         buscarInput.addEventListener('input', aplicarFiltros);
     }
     
-    // Selector de tallas
-    const tallaBtns = document.querySelectorAll('.talla-btn');
-    tallaBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            const card = this.closest('.producto-card');
-            const otrasTallas = card.querySelectorAll('.talla-btn');
-            otrasTallas.forEach(b => b.classList.remove('activa'));
-            this.classList.add('activa');
-        });
+    // Selector de tallas (delegado para contenido dinámico)
+    document.addEventListener('click', function(e){
+        const talla = e.target.closest('.talla-btn');
+        if (!talla) return;
+        const card = talla.closest('.producto-card');
+        if (!card) return;
+        card.querySelectorAll('.talla-btn').forEach(b => b.classList.remove('activa'));
+        talla.classList.add('activa');
     });
     
     // Botones de acción (delegado: corazón y vista rápida)
@@ -236,8 +235,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 <h3 class="producto-titulo">${p.title}</h3>
                 <p class="producto-precio">$${(p.price||0).toLocaleString()}</p>
                 <div class="producto-tallas">
+                  <button class="talla-btn">S</button>
                   <button class="talla-btn activa">M</button>
                   <button class="talla-btn">L</button>
+                  <button class="talla-btn">XL</button>
+                  <button class="talla-btn">XXL</button>
                 </div>
                 <button class="btn-carrito" data-title="${p.title}" data-price="${p.price}" data-image="${p.image}">Añadir al carrito <i class="fas fa-shopping-bag"></i></button>
               </div>
