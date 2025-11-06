@@ -62,10 +62,7 @@
     margin-bottom: 0.5rem;
 }
 
-.item-precio {
-    color: var(--verde-neon);
-    font-weight: 600;
-}
+.item-precio { color: var(--blanco); font-weight: 600; }
 
 .item-cantidad {
     display: flex;
@@ -85,10 +82,7 @@
     transition: var(--transicion);
 }
 
-.btn-cantidad:hover {
-    background-color: var(--verde-neon);
-    color: var(--negro);
-}
+.btn-cantidad:hover { background-color: #6F7377; color: var(--blanco); }
 
 .cantidad-input {
     width: 50px;

@@ -11,41 +11,59 @@
 </head>
 <body>
   <header class="header">
-<div class="logo">
-  <a href="index.html">
-    <h1 class="logo-text">AURA STREETWEAR</h1>
-  </a>
-</div>
-    
-    <nav class="nav">
-      <ul class="nav-list">
-        <li><a href="index.html">Inicio</a></li>
-        <li class="dropdown">
-          <a href="#">Categorías <i class="fas fa-chevron-down"></i></a>
-          <ul class="dropdown-menu">
-            <li><a href="catalogo-hombres.html">Hombres</a></li>
-            <li><a href="catalogo-mujeres.html">Mujeres</a></li>
-          </ul>
-        </li>
-        <li><a href="nosotros.html">Nosotros</a></li>
-      </ul>
-    </nav>
-    
-    <div class="iconos-header">
-      <a href="#" class="icono-header">
-        <i class="fas fa-search"></i>
+    <div class="header-left">
+      <button id="openMenu" class="menu-toggle" aria-label="Abrir menú">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+    <div class="header-center">
+      <a href="index.html" class="brand">
+        <h1 class="logo-text">AURA STREETWEAR</h1>
       </a>
-      <a href="login.html" class="icono-header">
+    </div>
+    <div class="header-right iconos-header">
+      <a href="login.html" class="icono-header" aria-label="Cuenta">
         <i class="fas fa-user"></i>
       </a>
-      <a href="carrito.html" class="icono-header">
+      <a href="#" id="openCart" class="icono-header" aria-label="Carrito">
         <i class="fas fa-shopping-bag"></i>
         <span class="contador-carrito">3</span>
       </a>
     </div>
+    <nav class="overlay-menu" id="overlayMenu" aria-hidden="true">
+      <div class="overlay-header">
+        <button id="closeMenu" class="close-menu" aria-label="Cerrar menú"><i class="fas fa-chevron-left"></i></button>
+        <span>Menú</span>
+      </div>
+      <div class="overlay-search">
+        <form class="overlay-search-form" id="overlaySearch">
+          <input class="overlay-search-input" id="overlaySearchInput" type="search" placeholder="Buscar productos..." aria-label="Buscar productos" />
+          <button class="overlay-search-btn" aria-label="Buscar"><i class="fas fa-search"></i></button>
+        </form>
+      </div>
+      <div class="overlay-group">
+        <a href="login.html" class="overlay-link"><span><i class="fas fa-user"></i> Cuenta</span><i class="fas fa-chevron-right"></i></a>
+      </div>
+      <div class="overlay-subgroup">
+        <a href="catalogo-hombres.html" class="overlay-sublink">Hombres</a>
+        <a href="catalogo-mujeres.html" class="overlay-sublink">Mujeres</a>
+      </div>
+    </nav>
+    <aside class="cart-drawer" id="overlayCart" aria-hidden="true">
+      <div class="cart-header">
+        <span class="title"><i class="fas fa-shopping-bag"></i> Tu Carrito</span>
+        <button id="closeCart" class="cart-close" aria-label="Cerrar carrito"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="cart-body"><!-- contenido generado por JS --></div>
+      <div class="cart-footer">
+        <div class="cart-total"><span>Total</span><span>$59.000</span></div>
+        <a class="btn-cart" href="carrito.html">Ver carrito</a>
+        <a class="btn-checkout" href="checkout.html">Comprar Ahora</a>
+      </div>
+    </aside>
   </header>
 
-  <main class="contenedor main-catalogo">
+  <main class="contenedor main-catalogo" data-genero="mujeres">
     <div class="ruta">
       <a href="index.html">Inicio</a> > <a href="catalogo.html">Catálogo</a> > <span>Mujeres</span>
     </div>
@@ -97,6 +115,11 @@
         </div>
       </div>
       
+      <div class="filtro-grupo" style="min-width:230px;">
+        <h3>Buscar</h3>
+        <input id="buscar-catalogo" type="search" class="filtro-select" placeholder="Nombre de prenda">
+      </div>
+
       <div class="ordenamiento">
         <label for="ordenar">Ordenar por:</label>
         <select id="ordenar" class="filtro-select">
@@ -108,22 +131,7 @@
       </div>
     </div>
     
-    <div class="estadisticas-catalogo">
-      <div class="estadistica">
-        <span class="numero">28</span>
-        <span class="texto">Productos</span>
-      </div>
-      <div class="estadistica">
-        <span class="numero">12</span>
-        <span class="texto">Nuevos</span>
-      </div>
-      <div class="estadistica">
-        <span class="numero">8</span>
-        <span class="texto">En Oferta</span>
-      </div>
-    </div>
-    
-    <div class="grid-productos">
+    <div class="grid-productos" id="grid-catalogo">
       <!-- Producto 1 -->
       <div class="producto-card">
         <div class="producto-imagen-contenedor">
@@ -267,14 +275,7 @@
       </div>
     </div>
     
-    <div class="paginacion">
-      <a href="#" class="pagina-activa">1</a>
-      <a href="#">2</a>
-      <a href="#">3</a>
-      <a href="#">4</a>
-      <a href="#">5</a>
-      <a href="#">Siguiente <i class="fas fa-chevron-right"></i></a>
-    </div>
+    <div class="grid-productos" id="grid-catalogo"></div>
     
     <div class="categoria-info">
       <div class="info-texto">
@@ -342,6 +343,10 @@
     </div>
   </footer>
 
+  <script src="assets/js/products.fallback.js"></script>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/products.api.js"></script>
   <script src="assets/js/catalogo.js"></script>
+  <script src="assets/js/main.js"></script>
 </body>
 </html>

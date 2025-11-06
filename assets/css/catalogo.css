@@ -77,15 +77,10 @@
     font-weight: 500;
 }
 
-.estadisticas-catalogo {
-    display: flex;
-    justify-content: center;
-    gap: 3rem;
-    margin: 2rem 0;
-    padding: 1.5rem;
-    background: var(--azul-noche);
-    border-radius: 12px;
-}
+/* ocultar bloque antiguo de estadísticas/banner */
+.estadisticas-catalogo { display: none !important; }
+.paginacion { display: none !important; }
+.filtros-catalogo { display: none !important; }
 
 .estadistica {
     text-align: center;
@@ -111,7 +106,27 @@
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 2rem;
     margin-bottom: 3rem;
+    width: 100%;
 }
+
+/* Forzar columnas claras en pantallas grandes */
+@media (min-width: 992px) {
+  .main-catalogo .grid-productos { grid-template-columns: repeat(3, minmax(280px, 1fr)); }
+}
+@media (min-width: 1200px) {
+  .main-catalogo .grid-productos { grid-template-columns: repeat(4, minmax(280px, 1fr)); }
+}
+
+/* Forzar mismo estilo que Mujeres en Hombres (3 columnas grandes en desktop) */
+@media (min-width: 1200px) {
+  .main-catalogo[data-genero="hombres"] .grid-productos {
+    grid-template-columns: repeat(3, minmax(320px, 1fr)) !important;
+  }
+}
+
+/* Asegurar altura consistente de tarjetas en catálogo */
+.main-catalogo .producto-imagen-contenedor { height: 320px; }
+.main-catalogo .producto-card { min-height: 520px; }
 
 .producto-card {
     background-color: var(--negro);
@@ -159,15 +174,9 @@
     z-index: 2;
 }
 
-.producto-badge.nuevo {
-    background: var(--verde-neon);
-    color: var(--negro);
-}
+.producto-badge.nuevo { background: #6F7377; color: var(--blanco); }
 
-.producto-badge.oferta {
-    background: var(--rojo-neon);
-    color: var(--blanco);
-}
+.producto-badge.oferta { background: var(--rojo-neon); color: var(--blanco); }
 
 .producto-acciones {
     position: absolute;
@@ -197,11 +206,7 @@
     border: 1px solid var(--gris-oscuro);
 }
 
-.accion-btn:hover {
-    background-color: var(--verde-neon);
-    color: var(--negro);
-    transform: scale(1.1);
-}
+.accion-btn:hover { background-color: #6F7377; color: var(--blanco); transform: scale(1.1); }
 
 .producto-info {
     padding: 1.5rem;

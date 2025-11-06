@@ -47,8 +47,12 @@ document.addEventListener('DOMContentLoaded', function() {
     if (loginForm) {
         loginForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            // Add login logic here
-            console.log('Login submitted');
+            const email = document.getElementById('login-email').value || 'usuario@demo.com';
+            // Simular login exitoso con cualquier dato
+            const user = { email, name: email.split('@')[0], loggedAt: Date.now() };
+            localStorage.setItem('aura_user', JSON.stringify(user));
+            // Redirigir a la portada o perfil
+            window.location.href = 'perfil.html';
         });
     }
     
@@ -64,8 +68,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             
-            // Add registration logic here
-            console.log('Registration submitted');
+            const email = document.getElementById('register-email').value || 'usuario@demo.com';
+            const nombre = document.getElementById('register-nombre').value || 'Usuario';
+            const user = { email, name: nombre, loggedAt: Date.now() };
+            localStorage.setItem('aura_user', JSON.stringify(user));
+            window.location.href = 'perfil.html';
         });
     }
     
@@ -74,8 +81,9 @@ document.addEventListener('DOMContentLoaded', function() {
     socialBtns.forEach(btn => {
         btn.addEventListener('click', function() {
             const provider = this.classList.contains('google') ? 'Google' : 'Facebook';
-            console.log(`Social login with ${provider}`);
-            // Add social login logic here
+            const user = { email: provider.toLowerCase()+"@demo.com", name: provider+" User", loggedAt: Date.now() };
+            localStorage.setItem('aura_user', JSON.stringify(user));
+            window.location.href = 'perfil.html';
         });
     });
 });

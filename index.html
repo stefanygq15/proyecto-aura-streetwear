@@ -17,38 +17,56 @@
   </button>
 
   <header class="header">
-    <div class="logo">
-      <a href="index.html">
+    <div class="header-left">
+      <button id="openMenu" class="menu-toggle" aria-label="Abrir menú">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+    <div class="header-center">
+      <a href="index.html" class="brand">
         <h1 class="logo-text">AURA STREETWEAR</h1>
       </a>
     </div>
-    
-    <nav class="nav" aria-label="Navegación principal">
-      <ul class="nav-list">
-        <li><a href="index.html">Inicio</a></li>
-        <li class="dropdown">
-          <a href="#" aria-haspopup="true" aria-expanded="false">Categorías <i class="fas fa-chevron-down"></i></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="catalogo-hombres.html">Hombres</a></li>
-            <li><a href="catalogo-mujeres.html">Mujeres</a></li>
-          </ul>
-        </li>
-        <li><a href="nosotros.html">Nosotros</a></li>
-      </ul>
-    </nav>
-    
-    <div class="iconos-header">
-      <a href="#" class="icono-header" aria-label="Buscar productos">
-        <i class="fas fa-search"></i>
-      </a>
-      <a href="login.html" class="icono-header" aria-label="Iniciar sesión">
+    <div class="header-right iconos-header">
+      <a href="login.html" class="icono-header" aria-label="Cuenta">
         <i class="fas fa-user"></i>
       </a>
-      <a href="carrito.html" class="icono-header" aria-label="Carrito de compras, 3 items">
+      <a href="#" id="openCart" class="icono-header" aria-label="Carrito de compras">
         <i class="fas fa-shopping-bag"></i>
         <span class="contador-carrito">3</span>
       </a>
     </div>
+    <nav class="overlay-menu" id="overlayMenu" aria-hidden="true">
+      <div class="overlay-header">
+        <button id="closeMenu" class="close-menu" aria-label="Cerrar menú"><i class="fas fa-chevron-left"></i></button>
+        <span>Menú</span>
+      </div>
+      <div class="overlay-search">
+        <form class="overlay-search-form" id="overlaySearch">
+          <input class="overlay-search-input" id="overlaySearchInput" type="search" placeholder="Buscar productos..." aria-label="Buscar productos" />
+          <button class="overlay-search-btn" aria-label="Buscar"><i class="fas fa-search"></i></button>
+        </form>
+      </div>
+      <div class="overlay-group">
+        <a href="login.html" class="overlay-link"><span><i class="fas fa-user"></i> Cuenta</span><i class="fas fa-chevron-right"></i></a>
+      </div>
+      <div class="overlay-subgroup">
+        <a href="catalogo-hombres.html" class="overlay-sublink">Hombres</a>
+        <a href="catalogo-mujeres.html" class="overlay-sublink">Mujeres</a>
+      </div>
+    </nav>
+    <aside class="cart-drawer" id="overlayCart" aria-hidden="true">
+      <div class="cart-header">
+        <span class="title"><i class="fas fa-shopping-bag"></i> Tu Carrito</span>
+        <button id="closeCart" class="cart-close" aria-label="Cerrar carrito"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="cart-body"><!-- contenido generado por JS --></div>
+      <div class="cart-footer">
+        <div class="cart-total"><span>Total</span><span>$124.000</span></div>
+        <a class="btn-cart" href="carrito.html">Ver carrito</a>
+        <a class="btn-checkout" href="checkout.html">Comprar Ahora</a>
+      </div>
+    </aside>
   </header>
 
   <main id="main-content">
@@ -56,7 +74,7 @@
       <div class="hero-text">
         <h1>Aura Streetwear</h1>
         <p>Descubre las nuevas tendencias en moda streetwear con diseños exclusivos y personalizados.</p>
-        <a href="#" class="btn btn-primario">Ver colección <i class="fas fa-arrow-right"></i></a>
+        <a href="coleccion.html" class="btn btn-primario">Ver colección <i class="fas fa-arrow-right"></i></a>
       </div>
     </section>
 
@@ -79,13 +97,7 @@
           </div>
         </div>
         
-        <div class="categoria-card">
-          <img src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Diseños personalizados de camisetas streetwear con estampados únicos" class="categoria-img">
-          <div class="categoria-overlay">
-            <h3 class="categoria-titulo">Personalizadas</h3>
-            <a href="#" class="btn btn-secundario">Ver más</a>
-          </div>
-        </div>
+          
       </div>
     </section>
 
@@ -100,7 +112,7 @@
         </div>
         
         <div class="productos-grid">
-          <div class="producto-card" role="article" aria-labelledby="producto-1">
+          <div class="producto-card" role="article" aria-labelledby="producto-1" data-genero="hombres">
             <div class="producto-imagen-contenedor">
               <img src="assets/images/cam3-h.png" alt="Camiseta básica color gris para hombre, corte regular" class="producto-imagen">
               <div class="producto-acciones">
@@ -121,7 +133,7 @@
             </div>
           </div>
           
-          <div class="producto-card" role="article" aria-labelledby="producto-2">
+          <div class="producto-card" role="article" aria-labelledby="producto-2" data-genero="hombres">
             <div class="producto-imagen-contenedor">
               <img src="assets/images/pan2-h.png" alt="Sudadera ajustada color negro para hombre, con capucha" class="producto-imagen">
               <div class="producto-acciones">
@@ -142,7 +154,7 @@
             </div>
           </div>
           
-          <div class="producto-card" role="article" aria-labelledby="producto-3">
+          <div class="producto-card" role="article" aria-labelledby="producto-3" data-genero="mujeres">
             <div class="producto-imagen-contenedor">
               <img src="assets/images/pan3-m.png" alt="Jean azul de corte ancho para mujer, estilo streetwear" class="producto-imagen">
               <div class="producto-acciones">
@@ -163,7 +175,7 @@
             </div>
           </div>
           
-          <div class="producto-card" role="article" aria-labelledby="producto-4">
+          <div class="producto-card" role="article" aria-labelledby="producto-4" data-genero="mujeres">
             <div class="producto-imagen-contenedor">
               <img src="assets/images/pan2-m.png" alt="Sudadera ancha color negro para mujer, estilo oversize" class="producto-imagen">
               <div class="producto-acciones">
@@ -225,10 +237,6 @@
           <h3>Información</h3>
           <ul class="footer-links">
             <li><a href="nosotros.html">Sobre nosotros</a></li>
-            <li><a href="#">Preguntas frecuentes</a></li>
-            <li><a href="#">Política de envíos</a></li>
-            <li><a href="#">Devoluciones</a></li>
-            <li><a href="#">Términos y condiciones</a></li>
           </ul>
         </div>
         
@@ -332,5 +340,7 @@
       });
     });
   </script>
+  <script src="assets/js/index.js"></script>
+  <script src="assets/js/main.js"></script>
 </body>
 </html>

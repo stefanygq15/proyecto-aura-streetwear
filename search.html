@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resultados de Búsqueda - Aura</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Khula:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <style>
+    .resultados { max-width: 900px; margin: 1.5rem auto; padding: 0 1rem; }
+    .res-item { display:flex; align-items:center; gap: .8rem; padding: .8rem; border:1px solid rgba(255,255,255,.12); border-radius:8px; background:#1b1c1f; margin-bottom:.6rem; }
+    .res-item img { width:64px; height:64px; object-fit:cover; border-radius:6px; }
+    .res-title { font-weight:600; }
+    .res-meta { opacity:.9; }
+  </style>
+  </head>
+  <body>
+  <header class="header">
+    <div class="header-left">
+      <button id="openMenu" class="menu-toggle" aria-label="Abrir menú"><i class="fas fa-bars"></i></button>
+    </div>
+    <div class="header-center">
+      <a href="index.html" class="brand"><h1 class="logo-text">AURA STREETWEAR</h1></a>
+    </div>
+    <div class="header-right iconos-header">
+      <a href="login.html" class="icono-header" aria-label="Cuenta"><i class="fas fa-user"></i></a>
+      <a href="#" id="openCart" class="icono-header" aria-label="Carrito"><i class="fas fa-shopping-bag"></i><span class="contador-carrito">3</span></a>
+    </div>
+    <nav class="overlay-menu" id="overlayMenu" aria-hidden="true">
+      <div class="overlay-header"><button id="closeMenu" class="close-menu" aria-label="Cerrar menú"><i class="fas fa-chevron-left"></i></button><span>Menú</span></div>
+      <div class="overlay-search">
+        <form class="overlay-search-form" id="overlaySearch">
+          <input class="overlay-search-input" id="overlaySearchInput" type="search" placeholder="Buscar productos..." aria-label="Buscar productos" />
+          <button class="overlay-search-btn" aria-label="Buscar"><i class="fas fa-search"></i></button>
+        </form>
+      </div>
+      <div class="overlay-group">
+        <a href="login.html" class="overlay-link"><span><i class="fas fa-user"></i> Cuenta</span><i class="fas fa-chevron-right"></i></a>
+      </div>
+      <div class="overlay-subgroup">
+        <a href="catalogo-hombres.html" class="overlay-sublink">Hombres</a>
+        <a href="catalogo-mujeres.html" class="overlay-sublink">Mujeres</a>
+      </div>
+    </nav>
+    <aside class="cart-drawer" id="overlayCart" aria-hidden="true">
+      <div class="cart-header"><span class="title"><i class="fas fa-shopping-bag"></i> Tu Carrito</span><button id="closeCart" class="cart-close" aria-label="Cerrar carrito"><i class="fas fa-times"></i></button></div>
+      <div class="cart-body"><!-- generado por JS --></div>
+      <div class="cart-footer"><div class="cart-total"><span>Total</span><span>$0</span></div><a class="btn-cart" href="carrito.html">Ver carrito</a><a class="btn-checkout" href="checkout.html">Comprar Ahora</a></div>
+    </aside>
+  </header>
+
+  <main class="resultados">
+    <h2>Resultados de búsqueda</h2>
+    <div id="lista-resultados"></div>
+  </main>
+
+  <script src="assets/js/products.fallback.js"></script>
+  <script>
+    async function cargarResultados(){
+      const cont = document.getElementById('lista-resultados');
+      const params = new URLSearchParams(window.location.search); const q = (params.get('search')||'').toLowerCase().trim();
+      if (!q){ cont.innerHTML = '<p style="opacity:.8">Escribe algo en la búsqueda del menú.</p>'; return; }
+      let items=[]; try{ const res = await fetch('assets/data/products.json'); items = await res.json(); }catch(e){ items = (window.PRODUCTS_FALLBACK||[]); }
+      const list = items.filter(p => p.title.toLowerCase().includes(q));
+      if (!list.length){ cont.innerHTML = '<p style="opacity:.8">Sin resultados.</p>'; return; }
+      cont.innerHTML = list.map(p => `
+        <div class='res-item'>
+          <img src='${p.image}' alt='${p.title}' />
+          <div style='flex:1'>
+            <div class='res-title'>${p.title}</div>
+            <div class='res-meta'>$${(p.price).toLocaleString()} • ${p.gender}</div>
+          </div>
+          <button class='btn-carrito' data-title='${p.title}' data-price='${p.price}' data-image='${p.image}' style='width:160px'>Añadir <i class="fas fa-shopping-bag"></i></button>
+        </div>`).join('');
+    }
+    document.addEventListener('DOMContentLoaded', cargarResultados);
+  </script>
+  <script src="assets/js/catalogo.js"></script>
+  <script src="assets/js/main.js"></script>
+  </body>
+  </html>

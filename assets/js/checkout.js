@@ -38,21 +38,8 @@ function anteriorPaso(paso) {
 
 // Validación de formularios por paso
 function validarPaso(paso) {
-    const pasoActual = document.getElementById(`paso-${paso + 1}`);
-    const inputs = pasoActual.querySelectorAll('input[required]');
-    
-    let valido = true;
-    
-    inputs.forEach(input => {
-        if (!input.value.trim()) {
-            input.style.borderColor = 'var(--rojo-neon)';
-            valido = false;
-        } else {
-            input.style.borderColor = '';
-        }
-    });
-    
-    return valido;
+    // Permitir avanzar sin validación estricta para demostración
+    return true;
 }
 
 // Cambio de método de pago
@@ -73,29 +60,48 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Manejar envío del formulario
+    // Render del resumen basado en carrito local
+    function currency(v){ return `$${(v||0).toLocaleString()}`; }
+    function renderResumenCheckout(){
+        const items = window.AuraCart ? window.AuraCart.get() : [];
+        const list = document.querySelector('.items-resumen');
+        if (list){
+            list.innerHTML = items.map(it => `
+            <div class="item-resumen">
+              <img src="${it.image||''}" class="item-imagen" alt="${it.title}">
+              <div class="item-info">
+                <div class="item-nombre">${it.title}</div>
+                <div class="item-detalles">${it.size?('Talla '+it.size+' • '):''}Cantidad: ${it.qty||1}</div>
+              </div>
+              <div class="item-precio">${currency((parseInt(it.price)||0)*(it.qty||1))}</div>
+            </div>`).join('');
+        }
+        const subtotal = items.reduce((a,it)=> a + (parseInt(it.price)||0)*(it.qty||1), 0);
+        const envio = subtotal>100000?0:8000;
+        const descuento = 0;
+        const total = subtotal + envio - descuento;
+        const set = (id,val)=>{ const el=document.getElementById(id); if(el) el.textContent = val; };
+        set('co-subtotal', currency(subtotal));
+        set('co-envio', envio===0? 'Gratis': currency(envio));
+        set('co-descuento', descuento?('-'+currency(descuento)):'$0');
+        set('co-total', currency(total));
+    }
+    renderResumenCheckout();
+
+    // Manejar envío del formulario (cualquier dato sirve)
     document.getElementById('form-checkout').addEventListener('submit', function(e) {
         e.preventDefault();
-        
-        // Validar términos y condiciones
-        const terminos = document.getElementById('terminos');
-        if (!terminos.checked) {
-            alert('Debes aceptar los términos y condiciones para continuar.');
-            return;
-        }
-        
-        // Simular procesamiento de pago
         const btnPagar = this.querySelector('button[type="submit"]');
-        const textoOriginal = btnPagar.innerHTML;
-        
         btnPagar.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Procesando...';
         btnPagar.disabled = true;
-        
-        // Simular delay de procesamiento
         setTimeout(() => {
-            alert('¡Pago procesado exitosamente! Tu pedido ha sido confirmado.');
-            window.location.href = 'confirmacion.html'; // Redirigir a página de confirmación
-        }, 2000);
+            const items = window.AuraCart? window.AuraCart.get():[];
+            const totalTxt = document.getElementById('co-total')?.textContent || '$0';
+            const order = { id: Date.now(), total: totalTxt, items: items, createdAt: new Date().toISOString() };
+            localStorage.setItem('aura_last_order', JSON.stringify(order));
+            if (window.AuraCart) window.AuraCart.clear();
+            window.location.href = 'confirmacion.html';
+        }, 1200);
     });
     
     // Cargar modo alto contraste si está activo

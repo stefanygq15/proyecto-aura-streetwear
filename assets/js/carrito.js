@@ -1,96 +1,89 @@
-function cambiarCantidad(button, cambio) {
-    const item = button.closest('.item-carrito');
-    const input = item.querySelector('.cantidad-input');
-    let cantidad = parseInt(input.value);
-    
-    cantidad += cambio;
-    
-    if (cantidad < 1) cantidad = 1;
-    if (cantidad > 10) cantidad = 10;
-    
-    input.value = cantidad;
-    actualizarSubtotal(item);
-    actualizarResumen();
-}
+// Render del carrito de la página usando el storage global (AuraCart)
+function currency(v){return `$${(v||0).toLocaleString()}`}
 
-function eliminarItem(button) {
-    const item = button.closest('.item-carrito');
-    item.style.animation = 'slideOut 0.3s ease';
-    
-    setTimeout(() => {
-        item.remove();
-        actualizarResumen();
-        verificarCarritoVacio();
-    }, 300);
-}
-
-function actualizarSubtotal(item) {
-    const precioTexto = item.querySelector('.item-precio').textContent;
-    const precio = parseInt(precioTexto.replace('$', '').replace('.', ''));
-    const cantidad = parseInt(item.querySelector('.cantidad-input').value);
-    const subtotal = precio * cantidad;
-    
-    item.querySelector('.item-subtotal').textContent = `$${subtotal.toLocaleString()}`;
-}
-
-function actualizarResumen() {
-    const items = document.querySelectorAll('.item-carrito');
-    let subtotal = 0;
-    
-    items.forEach(item => {
-        const subtotalTexto = item.querySelector('.item-subtotal').textContent;
-        subtotal += parseInt(subtotalTexto.replace('$', '').replace('.', ''));
+function renderCarritoPagina(){
+  const lista = document.getElementById('lista-items');
+  const vacio = document.getElementById('carrito-vacio');
+  if (!lista) return;
+  const cart = window.AuraCart ? window.AuraCart.get() : [];
+  lista.innerHTML = '';
+  if (!cart.length){
+    if (vacio) vacio.style.display = 'block';
+    lista.style.display = 'none';
+  } else {
+    if (vacio) vacio.style.display = 'none';
+    lista.style.display = 'flex';
+    cart.forEach((it, idx) => {
+      const el = document.createElement('div');
+      el.className = 'item-carrito';
+      el.innerHTML = `
+        <div class="item-imagen"><img src="${it.image||''}" alt="${it.title}"></div>
+        <div class="item-info">
+          <h3>${it.title}</h3>
+          <p class="item-detalles">${it.size?('Talla: '+it.size+' • '):''}</p>
+          <p class="item-precio">${currency(it.price)}</p>
+        </div>
+        <div class="item-cantidad">
+          <button class="btn-cantidad" data-idx="${idx}" data-delta="-1">-</button>
+          <input type="number" value="${it.qty||1}" min="1" class="cantidad-input" disabled>
+          <button class="btn-cantidad" data-idx="${idx}" data-delta="1">+</button>
+        </div>
+        <div class="item-subtotal">${currency((it.qty||1)*(parseInt(it.price)||0))}</div>
+        <div class="item-eliminar"><button class="btn-eliminar" data-remove="${idx}"><i class="fas fa-trash"></i></button></div>`;
+      lista.appendChild(el);
     });
-    
-    const envio = subtotal > 100000 ? 0 : 8000;
-    const descuento = 10000;
-    const total = subtotal + envio - descuento;
-    
-    document.querySelector('.resumen-linea:nth-child(1) span:last-child').textContent = `$${subtotal.toLocaleString()}`;
-    document.querySelector('.resumen-linea:nth-child(2) span:last-child').textContent = envio === 0 ? 'Gratis' : `$${envio.toLocaleString()}`;
-    document.querySelector('.resumen-linea:nth-child(3) span:last-child').textContent = `-$${descuento.toLocaleString()}`;
-    document.querySelector('.resumen-linea.total span:last-child').textContent = `$${total.toLocaleString()}`;
-}
-
-function verificarCarritoVacio() {
-    const items = document.querySelectorAll('.item-carrito');
-    const carritoVacio = document.getElementById('carrito-vacio');
-    const listaItems = document.getElementById('lista-items');
-    
-    if (items.length === 0) {
-        carritoVacio.style.display = 'block';
-        listaItems.style.display = 'none';
-    } else {
-        carritoVacio.style.display = 'none';
-        listaItems.style.display = 'flex';
-    }
-}
-
-function irACheckout() {
-    window.location.href = 'checkout.html';
-}
-
-// Inicializar
-document.addEventListener('DOMContentLoaded', function() {
-    if (localStorage.getItem('altoContraste') === 'true') {
-    document.body.classList.add('alto-contraste');
   }
-    actualizarResumen();
-    verificarCarritoVacio();
+  actualizarResumenPagina();
+}
+
+function actualizarResumenPagina(){
+  const cart = window.AuraCart ? window.AuraCart.get() : [];
+  const subtotal = cart.reduce((a,it)=> a + (parseInt(it.price)||0)*(it.qty||1),0);
+  const envio = subtotal>100000?0:8000;
+  const descuento = 0;
+  const total = subtotal+envio-descuento;
+  const set = (id,val)=>{ const el=document.getElementById(id); if(el) el.textContent = val; };
+  set('subtotal-cifra', currency(subtotal));
+  set('envio-cifra', envio===0? 'Gratis': currency(envio));
+  set('descuento-cifra', descuento?('-'+currency(descuento)): '$0');
+  set('total-cifra', currency(total));
+}
+
+function irACheckout(){ window.location.href = 'checkout.html'; }
+
+document.addEventListener('DOMContentLoaded', () =>{
+  if (localStorage.getItem('altoContraste') === 'true') document.body.classList.add('alto-contraste');
+  renderCarritoPagina();
+  // Delegación para cantidad
+  document.body.addEventListener('click', (e)=>{
+    const minusPlus = e.target.closest('.btn-cantidad');
+    if (minusPlus){
+      const idx = parseInt(minusPlus.getAttribute('data-idx'));
+      const delta = parseInt(minusPlus.getAttribute('data-delta'));
+      if (window.AuraCart){
+        const items = window.AuraCart.get();
+        const current = items[idx];
+        if (current){
+          const newQty = (current.qty||1)+delta;
+          if (newQty<=0){ items.splice(idx,1); window.AuraCart.save(items); }
+          else { current.qty = newQty; window.AuraCart.save(items); }
+          renderCarritoPagina(); if (window.openCartOverlay) window.openCartOverlay();
+        }
+      }
+    }
+    const remove = e.target.closest('[data-remove]');
+    if (remove){
+      const idx = parseInt(remove.getAttribute('data-remove'));
+      const items = window.AuraCart? window.AuraCart.get():[];
+      items.splice(idx,1); if(window.AuraCart) window.AuraCart.save(items);
+      renderCarritoPagina();
+    }
+  });
+  const vaciar = document.getElementById('vaciar-carrito');
+  if (vaciar){ vaciar.onclick = () => { if (window.AuraCart){ window.AuraCart.clear(); renderCarritoPagina(); } } }
 });
 
-// Animación CSS
+// Animación CSS (slideOut reutilizable)
 const style = document.createElement('style');
-style.textContent = `
-    @keyframes slideOut {
-        from {
-            opacity: 1;
-            transform: translateX(0);
-        }
-        to {
-            opacity: 0;
-            transform: translateX(-100%);
-        }
-    }
-`;
+style.textContent = `@keyframes slideOut {from{opacity:1;transform:translateX(0)} to{opacity:0;transform:translateX(-100%)}}`;
 document.head.appendChild(style);
