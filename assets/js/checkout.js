@@ -49,6 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
     const metodosPago = document.querySelectorAll('input[name="pago"]');
     const infoTarjeta = document.getElementById('info-tarjeta');
+    let resumenActual = { subtotal: 0, envio: 0, descuento: 0, total: 0 };
     
     metodosPago.forEach(metodo => {
         metodo.addEventListener('change', function() {
@@ -80,6 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const envio = subtotal>100000?0:8000;
         const descuento = 0;
         const total = subtotal + envio - descuento;
+        resumenActual = { subtotal, envio, descuento, total };
         const set = (id,val)=>{ const el=document.getElementById(id); if(el) el.textContent = val; };
         set('co-subtotal', currency(subtotal));
         set('co-envio', envio===0? 'Gratis': currency(envio));
@@ -89,19 +91,97 @@ document.addEventListener('DOMContentLoaded', function() {
     renderResumenCheckout();
 
     // Manejar envío del formulario (cualquier dato sirve)
-    document.getElementById('form-checkout').addEventListener('submit', function(e) {
+    const form = document.getElementById('form-checkout');
+    if (!form) return;
+
+    function showCheckoutMessage(msg, type = 'error') {
+        let alert = document.getElementById('checkoutMessage');
+        if (!alert) {
+            alert = document.createElement('div');
+            alert.id = 'checkoutMessage';
+            alert.className = 'checkout-alert';
+            form.prepend(alert);
+        }
+        alert.textContent = msg;
+        alert.classList.toggle('success', type === 'success');
+    }
+
+    function clearCheckoutMessage() {
+        const alert = document.getElementById('checkoutMessage');
+        if (alert) alert.textContent = '';
+    }
+
+    form.addEventListener('submit', async function(e) {
         e.preventDefault();
         const btnPagar = this.querySelector('button[type="submit"]');
+        const items = window.AuraCart ? window.AuraCart.get() : [];
+        if (!items.length) {
+            showCheckoutMessage('Tu carrito está vacío.');
+            return;
+        }
+        if (!form.terminos?.checked) {
+            showCheckoutMessage('Debes aceptar los términos y condiciones.');
+            return;
+        }
+
+        clearCheckoutMessage();
         btnPagar.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Procesando...';
         btnPagar.disabled = true;
-        setTimeout(() => {
-            const items = window.AuraCart? window.AuraCart.get():[];
-            const totalTxt = document.getElementById('co-total')?.textContent || '$0';
-            const order = { id: Date.now(), total: totalTxt, items: items, createdAt: new Date().toISOString() };
-            localStorage.setItem('aura_last_order', JSON.stringify(order));
+
+        const payload = {
+            shipping: {
+                name: form.nombre.value.trim(),
+                email: form.email.value.trim(),
+                phone: form.telefono.value.trim(),
+                document: form.documento.value.trim(),
+                address: form.direccion.value.trim(),
+                city: form.ciudad.value.trim(),
+                state: form.departamento.value.trim(),
+                zip: form['codigo-postal']?.value.trim(),
+                notes: ''
+            },
+            payment_method: form.querySelector('input[name="pago"]:checked')?.value || 'sin-definir',
+            shipping_method: 'standard',
+            items: items.map(it => ({
+                id: it.id || null,
+                slug: it.slug || null,
+                title: it.title,
+                price: parseInt(it.price, 10) || 0,
+                qty: it.qty || 1,
+                size: it.size || '',
+                image: it.image || ''
+            })),
+            summary: { ...resumenActual, items_count: items.reduce((a,it)=> a + (it.qty || 1), 0) }
+        };
+
+        try {
+            const res = await fetch('api/orders/create.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'include',
+                body: JSON.stringify(payload)
+            });
+            const data = await res.json();
+            if (res.status === 401) {
+                window.location.href = 'login.html?redirect=checkout';
+                return;
+            }
+            if (!res.ok || !data.order) {
+                throw new Error(data.error || 'No pudimos registrar tu pedido');
+            }
+            localStorage.setItem('aura_last_order', JSON.stringify({
+                ...data.order,
+                summary: payload.summary
+            }));
             if (window.AuraCart) window.AuraCart.clear();
-            window.location.href = 'confirmacion.html';
-        }, 1200);
+            showCheckoutMessage('Pedido registrado. Redirigiendo...', 'success');
+            setTimeout(() => window.location.href = 'confirmacion.html', 600);
+        } catch (error) {
+            showCheckoutMessage(error.message || 'Error al procesar el pago');
+        } finally {
+            btnPagar.innerHTML = 'Pagar ahora <i class="fas fa-lock"></i>';
+            btnPagar.disabled = false;
+        }
     });
     
     // Cargar modo alto contraste si está activo

@@ -482,6 +482,20 @@ body.alto-contraste .linea-total.total {
   }
 }
 
+.checkout-alert {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ff6b6b;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.checkout-alert.success {
+  color: var(--verde-neon);
+  border-color: rgba(0, 208, 132, 0.3);
+}
+
 /* Animaciones */
 @keyframes fadeIn {
   from {

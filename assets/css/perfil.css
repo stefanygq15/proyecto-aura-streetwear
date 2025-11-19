@@ -219,6 +219,77 @@
     border-top: 1px solid var(--gris-oscuro);
 }
 
+.pedidos-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.pedido-card {
+    border: 1px solid var(--gris-oscuro);
+    border-radius: 12px;
+    padding: 1.5rem;
+    background: rgba(255,255,255,0.02);
+}
+
+.pedido-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.pedido-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.8rem;
+    border-radius: 999px;
+    background: rgba(0,208,132,0.15);
+    color: var(--verde-neon);
+    font-size: 0.85rem;
+}
+
+.pedido-items {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-top: 1rem;
+}
+
+.pedido-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.pedido-item img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.pedido-item-info {
+    flex: 1;
+    font-size: 0.9rem;
+}
+
+.pedido-total {
+    font-weight: 600;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    font-size: 1rem;
+}
+
+.texto-muted {
+    color: var(--gris-medio);
+    font-size: 0.95rem;
+}
+
 @media (max-width: 768px) {
     .perfil-container {
         grid-template-columns: 1fr;

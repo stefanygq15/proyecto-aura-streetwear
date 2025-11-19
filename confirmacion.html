@@ -50,10 +50,11 @@
     (function(){
       try{
         const data = JSON.parse(localStorage.getItem('aura_last_order')||'{}');
-        if (data && data.total){
-          document.getElementById('orderTotal').textContent = `Total: ${data.total}`;
-          const count = (data.items||[]).reduce((a,i)=>a+(i.qty||1),0);
-          document.getElementById('orderInfo').textContent = `Orden #${data.id} • ${count} artículo(s)`;
+        if (data){
+          const total = data.total_formatted || (data.summary ? `${(data.summary.total||0).toLocaleString()}` : data.total);
+          if (total) document.getElementById('orderTotal').textContent = `Total: ${total}`;
+          const count = data.items_count || data.summary?.items_count || 0;
+          if (data.id) document.getElementById('orderInfo').textContent = `Orden #${data.id} · ${count || 0} artículo(s)`;
         }
       }catch(e){}
     })();

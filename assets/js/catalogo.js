@@ -222,10 +222,14 @@ document.addEventListener('DOMContentLoaded', function() {
         const searchInput = null;
 
         function render(list){
-            grid.innerHTML = list.map(p => `
-            <div class="producto-card" data-genero="${p.gender}" data-type="${p.type}">
+            const tpl = (p) => {
+                const productId = p.id || p.slug || '';
+                const productSlug = p.slug || p.id || '';
+                const image = p.image || 'assets/images/placeholder.png';
+                return `
+            <div class="producto-card" data-product-id="${productId}" data-product-slug="${productSlug}" data-genero="${p.gender || ''}" data-type="${p.type || ''}">
               <div class="producto-imagen-contenedor">
-                <img src="${p.image}" class="producto-imagen" alt="${p.title}">
+                <img src="${image}" class="producto-imagen" alt="${p.title}">
                 <div class="producto-acciones">
                   <button class="accion-btn" aria-label="Favorito"><i class="far fa-heart"></i></button>
                   <button class="accion-btn" aria-label="Vista rápida"><i class="fas fa-search"></i></button>
@@ -241,9 +245,12 @@ document.addEventListener('DOMContentLoaded', function() {
                   <button class="talla-btn">XL</button>
                   <button class="talla-btn">XXL</button>
                 </div>
-                <button class="btn-carrito" data-title="${p.title}" data-price="${p.price}" data-image="${p.image}">Añadir al carrito <i class="fas fa-shopping-bag"></i></button>
+                <button class="btn-carrito" data-product-id="${productId}" data-product-slug="${productSlug}" data-title="${p.title}" data-price="${p.price}" data-image="${image}">Añadir al carrito <i class="fas fa-shopping-bag"></i></button>
               </div>
-            </div>`).join('');
+            </div>`;
+            };
+            grid.innerHTML = list.map(p => `
+            ${tpl(p)}`).join('');
         }
 
         function apply(){

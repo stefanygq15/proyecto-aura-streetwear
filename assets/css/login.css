@@ -21,6 +21,17 @@
     box-shadow: var(--sombra);
 }
 
+.form-alert {
+    min-height: 1.25rem;
+    font-size: 0.9rem;
+    color: var(--rojo-neon);
+    margin: 0.5rem 0 0.75rem;
+}
+
+.form-alert.success {
+    color: var(--verde-neon);
+}
+
 .login-tabs {
     display: flex;
     margin-bottom: 2rem;

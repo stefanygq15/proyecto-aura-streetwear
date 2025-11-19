@@ -15,8 +15,9 @@
     total() { return this.get().reduce((a, it) => a + parsePrice(it.price) * (it.qty || 1), 0); },
     add(newItem) {
       const items = this.get();
-      const key = `${newItem.id || newItem.title}|${newItem.size || ''}`.toLowerCase();
-      const found = items.find(it => (`${it.id||it.title}|${it.size||''}`).toLowerCase() === key);
+      const identifier = newItem.id || newItem.slug || newItem.title;
+      const key = `${identifier}|${newItem.size || ''}`.toLowerCase();
+      const found = items.find(it => (`${it.id || it.slug || it.title}|${it.size||''}`).toLowerCase() === key);
       if (found) { found.qty = (found.qty || 1) + (newItem.qty || 1); }
       else { items.push({ ...newItem, qty: newItem.qty || 1 }); }
       this.save(items);
@@ -130,20 +131,37 @@
     });
   }
 
-  // Enlaces de cuenta según sesión
-  function updateAccountLinks() {
-    const user = localStorage.getItem('aura_user');
+  async function updateAccountLinks() {
     const accountLinks = [];
     document.querySelectorAll('.iconos-header a').forEach(a => {
       if (a.querySelector('.fa-user')) accountLinks.push(a);
     });
     const overlayAccount = document.querySelector('#overlayMenu .overlay-link[href="login.html"]') ||
       Array.from(document.querySelectorAll('#overlayMenu .overlay-link')).find(a => a.textContent.includes('Cuenta'));
+
+    let user = null;
+    try {
+      const res = await fetch('api/auth/session.php', { credentials: 'include' });
+      const data = await res.json();
+      if (data && data.authenticated) user = data.user;
+    } catch (err) {
+      user = null;
+    }
+
     const href = user ? 'perfil.html' : 'login.html';
-    accountLinks.forEach(a => a.setAttribute('href', href));
+    accountLinks.forEach(a => {
+      a.setAttribute('href', href);
+      a.classList.toggle('is-logged', Boolean(user));
+      if (user) {
+        a.setAttribute('title', `Hola, ${user.name}`);
+      } else {
+        a.removeAttribute('title');
+      }
+    });
     if (overlayAccount) overlayAccount.setAttribute('href', href);
   }
   updateAccountLinks();
+  window.refreshAuraSession = updateAccountLinks;
 
   // Overlay search submit -> ir a coleccion con query
   const overlaySearch = document.getElementById('overlaySearch');
@@ -270,6 +288,8 @@
     const btn = e.target.closest('.btn-carrito');
     if (!btn) return;
     const card = btn.closest('.producto-card');
+    const productId = btn.dataset.productId || card?.dataset.productId || '';
+    const productSlug = btn.dataset.productSlug || card?.dataset.productSlug || '';
     let title = btn.getAttribute('data-title');
     let price = btn.getAttribute('data-price');
     let image = btn.getAttribute('data-image');
@@ -278,7 +298,7 @@
     if (!image && card) image = card.querySelector('img')?.getAttribute('src');
     const size = card?.querySelector('.talla-btn.activa')?.textContent?.trim() || '';
     if (!title || !price) return;
-    Cart.add({ title, price: parsePrice(price), size, image });
+    Cart.add({ id: productId, slug: productSlug, title, price: parsePrice(price), size, image });
     updateBadge();
     // Abre el carrito para feedback inmediato
     openCart();
