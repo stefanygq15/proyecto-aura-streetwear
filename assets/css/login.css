@@ -1,17 +1,44 @@
 .main-login {
     padding: 2rem 0;
-    min-height: 70vh;
-    display: flex;
-    align-items: center;
+    min-height: 80vh;
 }
 
 .login-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: start;
-    max-width: 1000px;
+    max-width: 1280px;
     margin: 0 auto;
+    padding: 2rem 1.5rem 3rem;
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr 1fr;
+    gap: 1.75rem;
+    align-items: start;
+}
+
+.login-main {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+.login-hero-logo {
+    background: #0b0b0b;
+    border-radius: 18px;
+    padding: 1rem 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 0.5rem;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.45);
+    width: 100%;
+    max-width: 320px;
+    align-self: start;
+}
+
+.login-hero-logo img {
+    max-width: 220px;
+    width: 100%;
+    height: auto;
+    display: block;
 }
 
 .login-card {
@@ -19,6 +46,7 @@
     padding: 2.5rem;
     border-radius: 12px;
     box-shadow: var(--sombra);
+    align-self: start;
 }
 
 .form-alert {
@@ -30,6 +58,52 @@
 
 .form-alert.success {
     color: var(--verde-neon);
+}
+
+.login-benefits {
+    padding: 1.75rem;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+    align-self: start;
+}
+
+.login-benefits h3 {
+    color: var(--rojo-neon);
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+}
+
+.benefits-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.benefits-list li {
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    gap: 0.8rem;
+    align-items: center;
+}
+
+.benefits-list i {
+    font-size: 1.05rem;
+    color: var(--rojo-neon);
+}
+
+.benefits-list strong {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 0.15rem;
+}
+
+.benefits-list p {
+    color: var(--gris-medio);
+    font-size: 0.9rem;
+    margin: 0;
 }
 
 .login-tabs {
@@ -245,36 +319,44 @@
 }
 
 .login-benefits {
-    padding: 2rem;
+    padding: 1.75rem;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+    align-self: start;
 }
 
 .login-benefits h3 {
-    margin-bottom: 2rem;
-    color: var(--verde-neon);
+    color: var(--rojo-neon);
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
 }
 
 .benefits-list {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1.2rem;
 }
 
 .benefits-list li {
-    display: flex;
-    align-items: flex-start;
-    gap: 1rem;
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    gap: 0.8rem;
+    align-items: center;
 }
 
 .benefits-list i {
-    color: var(--verde-neon);
-    font-size: 1.2rem;
-    margin-top: 0.2rem;
+    font-size: 1.05rem;
+    color: var(--rojo-neon);
+    margin-top: 0.1rem;
 }
 
 .benefits-list strong {
     display: block;
-    margin-bottom: 0.2rem;
+    margin-bottom: 0.15rem;
+    font-size: 1rem;
 }
 
 .benefits-list p {
@@ -286,11 +368,15 @@
 @media (max-width: 768px) {
     .login-container {
         grid-template-columns: 1fr;
-        gap: 2rem;
+        gap: 1.5rem;
+        padding: 1rem;
     }
     
     .login-card {
-        padding: 2rem;
+        padding: 2rem 1.5rem;
+    }
+    .login-benefits {
+        padding: 1.5rem;
     }
     
     .form-grid {

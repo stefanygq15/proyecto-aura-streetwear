@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   if (localStorage.getItem('altoContraste') === 'true') {
     document.body.classList.add('alto-contraste');
   }
@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const tabBtns = document.querySelectorAll('.tab-btn');
   const tabContents = document.querySelectorAll('.tab-content');
   tabBtns.forEach(btn => {
-    btn.addEventListener('click', function() {
+    btn.addEventListener('click', function () {
       const tabId = this.getAttribute('data-tab');
       tabBtns.forEach(b => b.classList.remove('active'));
       tabContents.forEach(c => c.classList.remove('active'));
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const togglePasswordBtns = document.querySelectorAll('.toggle-password');
   togglePasswordBtns.forEach(btn => {
-    btn.addEventListener('click', function() {
+    btn.addEventListener('click', function () {
       const input = this.previousElementSibling;
       const icon = this.querySelector('i');
       if (!input) return;
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   if (loginForm) {
     const loginSubmitBtn = loginForm.querySelector('button[type="submit"]');
-    loginForm.addEventListener('submit', async function(e) {
+    loginForm.addEventListener('submit', async function (e) {
       e.preventDefault();
       const rawEmail = document.getElementById('login-email').value.trim();
       const password = document.getElementById('login-password').value;
@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   if (registerForm) {
     const registerSubmit = registerForm.querySelector('button[type="submit"]');
-    registerForm.addEventListener('submit', async function(e) {
+    registerForm.addEventListener('submit', async function (e) {
       e.preventDefault();
       const username = document.getElementById('register-username').value.trim();
       const password = document.getElementById('register-password').value;

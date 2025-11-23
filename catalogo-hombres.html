@@ -1,62 +1,78 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Catálogo Hombres - Aura Streetwear</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Khula:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Khula:wght@300;400;600;700&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/catalogo.css">
 </head>
+
 <body>
+
   <header class="header">
     <div class="header-left">
       <button id="openMenu" class="menu-toggle" aria-label="Abrir menú">
         <i class="fas fa-bars"></i>
       </button>
     </div>
+
     <div class="header-center">
       <a href="index.html" class="brand">
         <h1 class="logo-text">AURA STREETWEAR</h1>
       </a>
     </div>
+
     <div class="header-right iconos-header">
       <a href="login.html" class="icono-header" aria-label="Cuenta">
         <i class="fas fa-user"></i>
       </a>
       <a href="#" id="openCart" class="icono-header" aria-label="Carrito">
         <i class="fas fa-shopping-bag"></i>
-        <span class="contador-carrito">3</span>
+        <span class="contador-carrito">0</span>
       </a>
     </div>
+
     <nav class="overlay-menu" id="overlayMenu" aria-hidden="true">
       <div class="overlay-header">
         <button id="closeMenu" class="close-menu" aria-label="Cerrar menú"><i class="fas fa-chevron-left"></i></button>
         <span>Menú</span>
       </div>
+
       <div class="overlay-search">
         <form class="overlay-search-form" id="overlaySearch">
-          <input class="overlay-search-input" id="overlaySearchInput" type="search" placeholder="Buscar productos..." aria-label="Buscar productos" />
+          <input class="overlay-search-input" id="overlaySearchInput" type="search" placeholder="Buscar productos..."
+            aria-label="Buscar productos" />
           <button class="overlay-search-btn" aria-label="Buscar"><i class="fas fa-search"></i></button>
         </form>
       </div>
+
       <div class="overlay-group">
-        <a href="login.html" class="overlay-link"><span><i class="fas fa-user"></i> Cuenta</span><i class="fas fa-chevron-right"></i></a>
+        <a href="login.html" class="overlay-link"><span><i class="fas fa-user"></i> Cuenta</span><i
+            class="fas fa-chevron-right"></i></a>
       </div>
+
       <div class="overlay-subgroup">
         <a href="catalogo-hombres.html" class="overlay-sublink">Hombres</a>
         <a href="catalogo-mujeres.html" class="overlay-sublink">Mujeres</a>
       </div>
     </nav>
+
     <aside class="cart-drawer" id="overlayCart" aria-hidden="true">
       <div class="cart-header">
         <span class="title"><i class="fas fa-shopping-bag"></i> Tu Carrito</span>
         <button id="closeCart" class="cart-close" aria-label="Cerrar carrito"><i class="fas fa-times"></i></button>
       </div>
+
       <div class="cart-body"><!-- contenido generado por JS --></div>
+
       <div class="cart-footer">
-        <div class="cart-total"><span>Total</span><span>$59.000</span></div>
+        <div class="cart-total"><span>Total</span><span>$0</span></div>
         <a class="btn-cart" href="carrito.html">Ver carrito</a>
         <a class="btn-checkout" href="checkout.html">Comprar Ahora</a>
       </div>
@@ -67,24 +83,22 @@
     <div class="ruta">
       <a href="index.html">Inicio</a> > <a href="catalogo.html">Catálogo</a> > <span>Hombres</span>
     </div>
-    
-    <div class="cabecera-categoria">
-      <h1 class="titulo-pagina">Moda Masculina</h1>
-      <p class="descripcion-categoria">Descubre nuestra colección exclusiva para hombres. Diseños urbanos, cómodos y con estilo que definen tu personalidad.</p>
-    </div>
-    
-    
-    
-    <div class="grid-productos" id="grid-catalogo"></div>
-    
-    
-    
-    <div class="categoria-info">
+
+    <section class="cabecera-categoria">
+      <h1 class="titulo-pagina">Catálogo Hombres</h1>
+      <p class="descripcion-categoria">Explora nuestra colección exclusiva para hombres. Estilo urbano y comodidad sin
+        límites.</p>
+    </section>
+
+    <!-- Contenedor para los productos cargados dinámicamente -->
+    <div id="grid-catalogo" class="grid-productos"></div>
+
+    <section class="categoria-info">
       <div class="info-texto">
-        <h3>Moda Masculina con Actitud</h3>
-        <p>Nuestra colección para hombres está diseñada para quienes buscan comodidad sin sacrificar estilo. Desde camisetas básicas hasta hoodies y pants, cada pieza está creada con materiales de calidad y diseños que reflejan la esencia urbana.</p>
+        <h3>Estilo y Calidad</h3>
+        <p>Nuestra colección para hombres está diseñada pensando en la versatilidad y el confort. Cada prenda refleja la
+          esencia del streetwear moderno.</p>
         <ul>
-          <li>Materiales 100% algodón premium</li>
           <li>Tallaje exacto para mejor ajuste</li>
           <li>Diseños exclusivos y limitados</li>
           <li>Producción sostenible</li>
@@ -93,23 +107,26 @@
       <div class="info-imagen">
         <img src="assets/images/port-h.png" alt="Estilo Masculino">
       </div>
-    </div>
+    </section>
   </main>
 
-  <footer class="footer">
+  <footer class="footer" role="contentinfo">
     <div class="contenedor">
       <div class="footer-contenido">
         <div class="footer-col">
+          <div class="footer-logo-box">
+            <img src="assets/logos/logo.png" alt="Aura Streetwear" class="footer-logo">
+          </div>
           <h3>Aura Streetwear</h3>
           <p>Moda urbana con estilo y actitud. Diseños exclusivos para hombres y mujeres que quieren destacar.</p>
           <div class="footer-redes">
-            <a href="#" class="red-social"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" class="red-social"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="red-social"><i class="fab fa-tiktok"></i></a>
-            <a href="#" class="red-social"><i class="fab fa-whatsapp"></i></a>
+            <a href="#" class="red-social" aria-label="Síguenos en Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="red-social" aria-label="Síguenos en Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="red-social" aria-label="Síguenos en TikTok"><i class="fab fa-tiktok"></i></a>
+            <a href="#" class="red-social" aria-label="Contáctanos por WhatsApp"><i class="fab fa-whatsapp"></i></a>
           </div>
         </div>
-        
+
         <div class="footer-col">
           <h3>Comprar</h3>
           <ul class="footer-links">
@@ -117,14 +134,14 @@
             <li><a href="catalogo-mujeres.html">Mujeres</a></li>
           </ul>
         </div>
-        
+
         <div class="footer-col">
           <h3>Información</h3>
           <ul class="footer-links">
             <li><a href="nosotros.html">Sobre nosotros</a></li>
           </ul>
         </div>
-        
+
         <div class="footer-col">
           <h3>Contacto</h3>
           <ul class="footer-links">
@@ -134,7 +151,7 @@
           </ul>
         </div>
       </div>
-      
+
       <div class="footer-bottom">
         <p>&copy; 2025 Aura Streetwear. Todos los derechos reservados.</p>
       </div>
@@ -144,7 +161,9 @@
   <script src="assets/js/products.fallback.js"></script>
   <script src="assets/js/config.js"></script>
   <script src="assets/js/products.api.js"></script>
-  <script src="assets/js/catalogo.js"></script>
+  <script src="assets/js/catalogo.js?v=2"></script>
   <script src="assets/js/main.js"></script>
+
 </body>
+
 </html>

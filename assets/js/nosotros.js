@@ -1,17 +1,17 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Animación de contadores para logros
     if (localStorage.getItem('altoContraste') === 'true') {
-    document.body.classList.add('alto-contraste');
-  }
+        document.body.classList.add('alto-contraste');
+    }
     function animarContadores() {
         const contadores = document.querySelectorAll('.numero-logro');
         const velocidad = 2000; // Duración en milisegundos
-        
+
         contadores.forEach(contador => {
             const objetivo = +contador.getAttribute('data-objetivo') || parseInt(contador.textContent);
             const incremento = objetivo / (velocidad / 16);
             let valorActual = 0;
-            
+
             const actualizarContador = () => {
                 if (valorActual < objetivo) {
                     valorActual += incremento;
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     contador.textContent = objetivo + (contador.textContent.includes('+') ? '+' : '');
                 }
             };
-            
+
             // Solo animar cuando el elemento sea visible
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -32,27 +32,27 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 });
             });
-            
+
             observer.observe(contador);
         });
     }
-    
+
     // Efecto parallax suave para el hero
     function efectoParallax() {
         const hero = document.querySelector('.hero-nosotros');
         if (hero) {
-            window.addEventListener('scroll', function() {
+            window.addEventListener('scroll', function () {
                 const scrolled = window.pageYOffset;
                 const rate = scrolled * -0.5;
                 hero.style.transform = `translateY(${rate}px)`;
             });
         }
     }
-    
+
     // Animación de aparición para las secciones
     function animarAlScroll() {
         const elementos = document.querySelectorAll('.card-mv, .paso, .miembro-equipo, .logro-item');
-        
+
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }, {
             threshold: 0.1
         });
-        
+
         elementos.forEach(elemento => {
             elemento.style.opacity = '0';
             elemento.style.transform = 'translateY(30px)';
@@ -72,28 +72,28 @@ document.addEventListener('DOMContentLoaded', function() {
             observer.observe(elemento);
         });
     }
-    
+
     // Efecto hover mejorado para tarjetas
     function efectosHover() {
         const tarjetas = document.querySelectorAll('.card-mv, .miembro-equipo, .paso');
-        
+
         tarjetas.forEach(tarjeta => {
-            tarjeta.addEventListener('mouseenter', function() {
+            tarjeta.addEventListener('mouseenter', function () {
                 this.style.boxShadow = '0 20px 40px rgba(0, 208, 132, 0.2)';
             });
-            
-            tarjeta.addEventListener('mouseleave', function() {
+
+            tarjeta.addEventListener('mouseleave', function () {
                 this.style.boxShadow = 'var(--sombra)';
             });
         });
     }
-    
+
     // Navegación suave para enlaces internos
     function navegacionSuave() {
         const enlaces = document.querySelectorAll('a[href^="#"]');
-        
+
         enlaces.forEach(enlace => {
-            enlace.addEventListener('click', function(e) {
+            enlace.addEventListener('click', function (e) {
                 e.preventDefault();
                 const objetivo = document.querySelector(this.getAttribute('href'));
                 if (objetivo) {
@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     }
-    
+
     // Inicializar todas las funciones
     function init() {
         animarContadores();
@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', function() {
         animarAlScroll();
         efectosHover();
         navegacionSuave();
-        
+
         // Agregar data-objetivo a los contadores
         document.querySelectorAll('.numero-logro').forEach(contador => {
             const valor = contador.textContent.replace('+', '');
@@ -121,9 +121,9 @@ document.addEventListener('DOMContentLoaded', function() {
             contador.textContent = '0';
         });
     }
-    
+
     init();
-    
+
     // Efecto de escritura para el hero (opcional)
     function efectoEscritura() {
         const subtitulo = document.querySelector('.hero-subtitulo');
@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const textoOriginal = subtitulo.textContent;
             subtitulo.textContent = '';
             let i = 0;
-            
+
             function escribir() {
                 if (i < textoOriginal.length) {
                     subtitulo.textContent += textoOriginal.charAt(i);
@@ -139,7 +139,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     setTimeout(escribir, 50);
                 }
             }
-            
+
             // Iniciar escritura cuando el elemento sea visible
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -149,11 +149,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 });
             });
-            
+
             observer.observe(subtitulo);
         }
     }
-    
+
     // Descomenta la siguiente línea si quieres el efecto de escritura
     // efectoEscritura();
 });
@@ -162,7 +162,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function crearParticulas() {
     const hero = document.querySelector('.hero-nosotros');
     if (!hero) return;
-    
+
     for (let i = 0; i < 50; i++) {
         const particula = document.createElement('div');
         particula.className = 'particula';
@@ -179,7 +179,7 @@ function crearParticulas() {
         `;
         hero.appendChild(particula);
     }
-    
+
     // Agregar animación CSS
     const style = document.createElement('style');
     style.textContent = `

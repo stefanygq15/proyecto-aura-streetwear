@@ -1,161 +1,110 @@
--- Aura Streetwear - Esquema MySQL
--- Importar desde phpMyAdmin apuntando a la base `aura`
-
+-- Aura Streetwear - esquema limpio y escalable para MySQL
 SET NAMES utf8mb4;
 SET time_zone = '+00:00';
+SET FOREIGN_KEY_CHECKS = 0;
 
--- Catálogos
-CREATE TABLE IF NOT EXISTS categories (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(100) NOT NULL UNIQUE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- Limpiar tablas antiguas que referencian products/users de esquemas previos
+DROP TABLE IF EXISTS order_items;
+DROP TABLE IF EXISTS orders;
+DROP TABLE IF EXISTS product_sizes;
+DROP TABLE IF EXISTS product_images;
+DROP TABLE IF EXISTS wishlists;
+DROP TABLE IF EXISTS assets;
+DROP TABLE IF EXISTS products;
+DROP TABLE IF EXISTS categories;
+DROP TABLE IF EXISTS sizes;
+DROP TABLE IF EXISTS users;
 
-CREATE TABLE IF NOT EXISTS products (
-  id CHAR(36) PRIMARY KEY DEFAULT (UUID()),
-  slug VARCHAR(120) UNIQUE,
-  title VARCHAR(255) NOT NULL,
-  description TEXT,
-  price_cents INT UNSIGNED NOT NULL,
-  gender ENUM('hombres','mujeres') NOT NULL,
-  category_id INT,
+CREATE TABLE users (
+  id CHAR(36) PRIMARY KEY,
+  email VARCHAR(160) NOT NULL UNIQUE,
+  full_name VARCHAR(160) NOT NULL,
+  password_hash VARCHAR(255) NOT NULL,
+  phone VARCHAR(40),
+  wishlist LONGTEXT NOT NULL DEFAULT '[]',
+  role ENUM('customer','admin') NOT NULL DEFAULT 'customer',
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  CONSTRAINT fk_products_category FOREIGN KEY (category_id) REFERENCES categories(id)
+  UNIQUE KEY uniq_users_email (email)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE IF NOT EXISTS product_images (
+CREATE TABLE products (
+  id CHAR(36) PRIMARY KEY,
+  slug VARCHAR(140) NOT NULL UNIQUE,
+  title VARCHAR(200) NOT NULL,
+  description TEXT,
+  price_cents INT UNSIGNED NOT NULL,
+  stock INT UNSIGNED NOT NULL DEFAULT 0,
+  gender ENUM('hombres','mujeres','unisex') NOT NULL DEFAULT 'unisex',
+  category VARCHAR(80),
+  main_image VARCHAR(255),
+  status ENUM('draft','published','archived') NOT NULL DEFAULT 'published',
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Catalogo de assets (imagenes, banners, sliders)
+CREATE TABLE assets (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  product_id CHAR(36),
-  url VARCHAR(255) NOT NULL,
-  is_primary TINYINT(1) NOT NULL DEFAULT 0,
-  UNIQUE KEY uniq_product_image (product_id, url),
-  CONSTRAINT fk_product_images_product FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
+  name VARCHAR(150) NOT NULL,
+  kind ENUM('image','video','other') NOT NULL DEFAULT 'image',
+  path VARCHAR(255) NOT NULL,
+  alt_text VARCHAR(255),
+  tags VARCHAR(255),
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  UNIQUE KEY uniq_assets_path (path)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE IF NOT EXISTS sizes (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  code VARCHAR(10) NOT NULL UNIQUE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-CREATE TABLE IF NOT EXISTS product_sizes (
-  product_id CHAR(36),
-  size_id INT,
-  stock INT NOT NULL DEFAULT 10,
-  PRIMARY KEY (product_id, size_id),
-  CONSTRAINT fk_product_sizes_product FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE,
-  CONSTRAINT fk_product_sizes_size FOREIGN KEY (size_id) REFERENCES sizes(id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- Pedidos
-CREATE TABLE IF NOT EXISTS users (
-  id CHAR(36) PRIMARY KEY DEFAULT (UUID()),
-  email VARCHAR(255) NOT NULL UNIQUE,
-  name VARCHAR(255) NOT NULL,
-  password_hash VARCHAR(255) NOT NULL,
-  role ENUM('customer','admin') NOT NULL DEFAULT 'customer',
-  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-CREATE TABLE IF NOT EXISTS orders (
-  id CHAR(36) PRIMARY KEY DEFAULT (UUID()),
+CREATE TABLE orders (
+  id CHAR(36) PRIMARY KEY,
   user_id CHAR(36),
-  status VARCHAR(30) NOT NULL DEFAULT 'pending',
+  status ENUM('pending','paid','shipped','delivered','cancelled') NOT NULL DEFAULT 'pending',
   total_cents INT UNSIGNED NOT NULL DEFAULT 0,
-  shipping_name VARCHAR(255),
-  shipping_email VARCHAR(255),
-  shipping_phone VARCHAR(50),
+  items_count INT UNSIGNED NOT NULL DEFAULT 0,
+  items LONGTEXT NOT NULL,
+  shipping_name VARCHAR(160),
+  shipping_email VARCHAR(160),
+  shipping_phone VARCHAR(40),
   shipping_address VARCHAR(255),
   shipping_city VARCHAR(120),
   shipping_state VARCHAR(120),
-  shipping_zip VARCHAR(20),
+  shipping_zip VARCHAR(24),
   shipping_notes TEXT,
   payment_method VARCHAR(50),
   shipping_method VARCHAR(50),
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  CONSTRAINT fk_orders_user FOREIGN KEY (user_id) REFERENCES users(id)
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  KEY idx_orders_user (user_id, created_at),
+  CONSTRAINT fk_orders_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE IF NOT EXISTS order_items (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  order_id CHAR(36),
-  product_id CHAR(36),
-  product_slug VARCHAR(120),
-  size_id INT,
-  size_label VARCHAR(20),
-  qty INT NOT NULL DEFAULT 1,
-  price_cents INT UNSIGNED NOT NULL DEFAULT 0,
-  title VARCHAR(255),
-  image_url VARCHAR(255),
-  CONSTRAINT fk_order_items_order FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE,
-  CONSTRAINT fk_order_items_product FOREIGN KEY (product_id) REFERENCES products(id),
-  CONSTRAINT fk_order_items_size FOREIGN KEY (size_id) REFERENCES sizes(id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+SET FOREIGN_KEY_CHECKS = 1;
 
--- Datos base
-INSERT IGNORE INTO categories (name) VALUES ('Camisetas');
-
-INSERT IGNORE INTO sizes (code) VALUES ('S'), ('M'), ('L'), ('XL');
-
-INSERT INTO products (slug, title, description, price_cents, gender, category_id)
-VALUES
-  ('cam1-h','Camiseta Básica Negra','Algodón suave, corte regular.',59000,'hombres',1),
-  ('cam2-h','Camiseta Básica Azul','Algodón suave, corte regular.',59000,'hombres',1),
-  ('cam3-h','Camiseta Básica Gris','Algodón suave, corte regular.',59000,'hombres',1),
-  ('pan1-h','Pantalón Deportivo Negro','Tela cómoda y resistente.',99000,'hombres',1),
-  ('pan2-h','Sudadera Ajustada Negra','Cálida, ideal para clima frío.',65000,'hombres',1),
-  ('pan3-h','Camiseta Deportiva Gris','Secado rápido.',62000,'hombres',1),
-  ('cam1-m','Camiseta Oversize Gris','Corte amplio y cómodo.',59000,'mujeres',1),
-  ('cam2-m','Camiseta Básica Rosa','Algodón suave.',59000,'mujeres',1),
-  ('cam3-m','Camiseta Básica Verde','Algodón suave.',59000,'mujeres',1),
-  ('cam4-m','Camiseta Básica Blanca','Clásica y ligera.',59000,'mujeres',1),
-  ('pan1-m','Vestido Verde','Ligero y con caída natural.',120000,'mujeres',1),
-  ('pan2-m','Sudadera Oversize Negra','Gran comodidad.',85000,'mujeres',1),
-  ('pan3-m','Jean Ancho Azul','Corte amplio.',72000,'mujeres',1)
+INSERT INTO products (id, slug, title, description, price_cents, stock, gender, category, main_image) VALUES
+  (UUID(), 'cam1-h', 'Camiseta basica negra', 'Algodon suave, corte regular.', 59000, 50, 'hombres', 'camisetas', 'assets/images/cam1-h.png'),
+  (UUID(), 'cam2-h', 'Camiseta basica azul', 'Algodon suave, corte regular.', 59000, 50, 'hombres', 'camisetas', 'assets/images/cam2-h.png'),
+  (UUID(), 'pan1-h', 'Pantalon deportivo negro', 'Tela comoda y resistente.', 99000, 40, 'hombres', 'pantalones', 'assets/images/pan1-h.png'),
+  (UUID(), 'cam1-m', 'Camiseta oversize gris', 'Corte amplio y comodo.', 59000, 60, 'mujeres', 'camisetas', 'assets/images/cam1-m.png'),
+  (UUID(), 'pan1-m', 'Vestido verde', 'Ligero y con caida natural.', 120000, 30, 'mujeres', 'vestidos', 'assets/images/pan1-m.png'),
+  (UUID(), 'pan2-m', 'Sudadera oversize negra', 'Suave y abrigada.', 85000, 35, 'mujeres', 'sudaderas', 'assets/images/pan2-m.png')
 ON DUPLICATE KEY UPDATE
   title = VALUES(title),
   description = VALUES(description),
   price_cents = VALUES(price_cents),
+  stock = VALUES(stock),
   gender = VALUES(gender),
-  category_id = VALUES(category_id);
+  category = VALUES(category),
+  main_image = VALUES(main_image);
 
-INSERT INTO product_images (product_id, url, is_primary)
-SELECT id, 'assets/images/cam1-h.png', 1 FROM products WHERE slug = 'cam1-h'
-ON DUPLICATE KEY UPDATE url = VALUES(url);
-INSERT INTO product_images (product_id, url, is_primary)
-SELECT id, 'assets/images/cam2-h.png', 1 FROM products WHERE slug = 'cam2-h'
-ON DUPLICATE KEY UPDATE url = VALUES(url);
-INSERT INTO product_images (product_id, url, is_primary)
-SELECT id, 'assets/images/cam3-h.png', 1 FROM products WHERE slug = 'cam3-h'
-ON DUPLICATE KEY UPDATE url = VALUES(url);
-INSERT INTO product_images (product_id, url, is_primary)
-SELECT id, 'assets/images/pan1-h.png', 1 FROM products WHERE slug = 'pan1-h'
-ON DUPLICATE KEY UPDATE url = VALUES(url);
-INSERT INTO product_images (product_id, url, is_primary)
-SELECT id, 'assets/images/pan2-h.png', 1 FROM products WHERE slug = 'pan2-h'
-ON DUPLICATE KEY UPDATE url = VALUES(url);
-INSERT INTO product_images (product_id, url, is_primary)
-SELECT id, 'assets/images/pan3-h.png', 1 FROM products WHERE slug = 'pan3-h'
-ON DUPLICATE KEY UPDATE url = VALUES(url);
-INSERT INTO product_images (product_id, url, is_primary)
-SELECT id, 'assets/images/cam1-m.png', 1 FROM products WHERE slug = 'cam1-m'
-ON DUPLICATE KEY UPDATE url = VALUES(url);
-INSERT INTO product_images (product_id, url, is_primary)
-SELECT id, 'assets/images/cam2-m.png', 1 FROM products WHERE slug = 'cam2-m'
-ON DUPLICATE KEY UPDATE url = VALUES(url);
-INSERT INTO product_images (product_id, url, is_primary)
-SELECT id, 'assets/images/cam3-m.png', 1 FROM products WHERE slug = 'cam3-m'
-ON DUPLICATE KEY UPDATE url = VALUES(url);
-INSERT INTO product_images (product_id, url, is_primary)
-SELECT id, 'assets/images/cam4-m.png', 1 FROM products WHERE slug = 'cam4-m'
-ON DUPLICATE KEY UPDATE url = VALUES(url);
-INSERT INTO product_images (product_id, url, is_primary)
-SELECT id, 'assets/images/pan1-m.png', 1 FROM products WHERE slug = 'pan1-m'
-ON DUPLICATE KEY UPDATE url = VALUES(url);
-INSERT INTO product_images (product_id, url, is_primary)
-SELECT id, 'assets/images/pan2-m.png', 1 FROM products WHERE slug = 'pan2-m'
-ON DUPLICATE KEY UPDATE url = VALUES(url);
-INSERT INTO product_images (product_id, url, is_primary)
-SELECT id, 'assets/images/pan3-m.png', 1 FROM products WHERE slug = 'pan3-m'
-ON DUPLICATE KEY UPDATE url = VALUES(url);
+INSERT INTO assets (name, kind, path, alt_text, tags) VALUES
+  ('Slider 1', 'image', 'assets/slider/1.png', 'Slider 1', 'slider,home'),
+  ('Slider 2', 'image', 'assets/slider/2.png', 'Slider 2', 'slider,home'),
+  ('Slider 3', 'image', 'assets/slider/3.png', 'Slider 3', 'slider,home'),
+  ('Slider 4', 'image', 'assets/slider/4.png', 'Slider 4', 'slider,home'),
+  ('Slider 5', 'image', 'assets/slider/5.png', 'Slider 5', 'slider,home')
+ON DUPLICATE KEY UPDATE
+  name = VALUES(name),
+  alt_text = VALUES(alt_text),
+  tags = VALUES(tags);
 
 COMMIT;

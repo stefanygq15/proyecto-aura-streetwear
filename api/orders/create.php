@@ -63,17 +63,22 @@ if ($totalCents <= 0 || empty($normalizedItems)) {
 
 $orderId = $pdo->query('SELECT UUID()')->fetchColumn();
 $productLookup = $pdo->prepare('SELECT id FROM products WHERE id = ? OR slug = ? LIMIT 1');
-$sizeLookup = $pdo->prepare('SELECT id FROM sizes WHERE code = ? LIMIT 1');
 
 try {
   $pdo->beginTransaction();
 
-  $stmt = $pdo->prepare('INSERT INTO orders (id, user_id, status, total_cents, shipping_name, shipping_email, shipping_phone, shipping_address, shipping_city, shipping_state, shipping_zip, shipping_notes, payment_method, shipping_method) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+  // En vez de order_items separados, guardamos los items como JSON compacto
+  $itemsJson = json_encode($normalizedItems, JSON_UNESCAPED_UNICODE);
+  $itemsCount = array_sum(array_column($normalizedItems, 'qty'));
+
+  $stmt = $pdo->prepare('INSERT INTO orders (id, user_id, status, total_cents, items_count, items, shipping_name, shipping_email, shipping_phone, shipping_address, shipping_city, shipping_state, shipping_zip, shipping_notes, payment_method, shipping_method) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
   $stmt->execute([
     $orderId,
     $sessionUser['id'],
     'pending',
     $totalCents,
+    $itemsCount,
+    $itemsJson,
     $shippingName,
     $shippingEmail,
     $shippingPhone,
@@ -86,34 +91,6 @@ try {
     $shippingMethod,
   ]);
 
-  $insertItem = $pdo->prepare('INSERT INTO order_items (order_id, product_id, product_slug, size_id, size_label, qty, price_cents, title, image_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
-
-  foreach ($normalizedItems as $item) {
-    $productId = null;
-    if (!empty($item['product_id']) || !empty($item['product_slug'])) {
-      $productLookup->execute([$item['product_id'] ?? null, $item['product_slug'] ?? $item['product_id'] ?? null]);
-      $productId = $productLookup->fetchColumn() ?: null;
-    }
-
-    $sizeId = null;
-    if (!empty($item['size'])) {
-      $sizeLookup->execute([$item['size']]);
-      $sizeId = $sizeLookup->fetchColumn() ?: null;
-    }
-
-    $insertItem->execute([
-      $orderId,
-      $productId,
-      $item['product_slug'],
-      $sizeId,
-      $item['size'],
-      $item['qty'],
-      $item['price'],
-      $item['title'],
-      $item['image'],
-    ]);
-  }
-
   $pdo->commit();
 
   $orderInfo = [
@@ -121,7 +98,7 @@ try {
     'status' => 'pending',
     'total_cents' => $totalCents,
     'total_formatted' => '$' . number_format($totalCents, 0, ',', '.'),
-    'items_count' => array_sum(array_column($normalizedItems, 'qty')),
+    'items_count' => $itemsCount,
     'created_at' => date('c'),
   ];
 

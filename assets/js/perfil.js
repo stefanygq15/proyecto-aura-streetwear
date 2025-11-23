@@ -13,6 +13,7 @@
     const telefonoInput = document.getElementById('telefono');
     const cerrarSesionBtn = document.querySelector('.cerrar-sesion');
     const pedidosLista = document.getElementById('listaPedidos');
+    const deseosLista = document.getElementById('listaDeseos');
     const sections = document.querySelectorAll('.seccion-perfil');
     const menuLinks = document.querySelectorAll('.perfil-menu a[href^="#"]:not(.cerrar-sesion)');
 
@@ -45,6 +46,7 @@
         user = data.user;
         renderUser();
         loadOrders();
+        loadWishlist();
       } catch (err) {
         console.error(err);
         window.location.href = 'login.html?redirect=perfil';
@@ -69,7 +71,7 @@
       if (nombreInput) nombreInput.value = nombre;
       if (apellidoInput) apellidoInput.value = apellido;
       if (correoInput) correoInput.value = user.email || '';
-      if (telefonoInput && user.phone) telefonoInput.value = user.phone;
+      if (telefonoInput) telefonoInput.value = user.phone || '';
     }
 
     async function loadOrders() {
@@ -101,7 +103,7 @@
           ${item.image ? `<img src="${item.image}" alt="${item.title}">` : ''}
           <div class="pedido-item-info">
             <strong>${item.title}</strong>
-            <div>${item.qty} unidad(es) ${item.size ? `· Talla ${item.size}` : ''}</div>
+            <div>${item.qty} unidad(es) ${item.size ? `- Talla ${item.size}` : ''}</div>
           </div>
           <span>${item.price_formatted}</span>
         </div>
@@ -128,6 +130,71 @@
       `;
     }
 
+    async function loadWishlist() {
+      if (!deseosLista) return;
+      deseosLista.innerHTML = '<p class="texto-muted">Cargando lista...</p>';
+      try {
+        const res = await fetch('api/wishlist.php', { credentials: 'include' });
+        if (res.status === 401) {
+          window.location.href = 'login.html?redirect=perfil';
+          return;
+        }
+        const data = await res.json();
+        const items = data.items || [];
+        if (!items.length) {
+          deseosLista.innerHTML = '<p class="texto-muted">Aún no tienes productos en tu lista.</p>';
+          return;
+        }
+        deseosLista.innerHTML = items.map(renderDeseo).join('');
+      } catch (err) {
+        deseosLista.innerHTML = '<p class="texto-muted">No pudimos cargar tu lista.</p>';
+      }
+    }
+
+    function renderDeseo(item) {
+      return `
+        <article class="pedido-card deseo-card" data-slug="${item.slug}">
+          <div class="pedido-header">
+            <div class="pedido-info">
+              <h3>${item.title || item.slug}</h3>
+              <p class="texto-muted">${item.price_formatted || ''}</p>
+            </div>
+            <button class="btn btn-secundario btn-remove-deseo" data-slug="${item.slug}">
+              <i class="fas fa-times"></i> Quitar
+            </button>
+          </div>
+          <div class="pedido-items deseo-items">
+            ${item.image ? `<div class="thumb"><img src="${item.image}" alt="${item.title}"></div>` : ''}
+          </div>
+        </article>
+      `;
+    }
+
+    if (deseosLista) {
+      deseosLista.addEventListener('click', async (e) => {
+        const btn = e.target.closest('.btn-remove-deseo');
+        if (!btn) return;
+        const slug = btn.dataset.slug;
+        try {
+          const res = await fetch('api/wishlist.php', {
+            method: 'DELETE',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ product_slug: slug }),
+          });
+          const data = await res.json();
+          if (!res.ok) throw new Error(data.error || 'No se pudo quitar');
+          const items = data.items || [];
+          deseosLista.innerHTML = items.length
+            ? items.map(renderDeseo).join('')
+            : '<p class="texto-muted">Aún no tienes productos en tu lista.</p>';
+          showMessage('Producto removido de tu lista');
+        } catch (err) {
+          showMessage(err.message || 'Error al quitar', true);
+        }
+      });
+    }
+
     if (cerrarSesionBtn) {
       cerrarSesionBtn.addEventListener('click', async (e) => {
         e.preventDefault();
@@ -142,10 +209,35 @@
 
     const form = document.querySelector('.form-perfil');
     if (form) {
-      form.addEventListener('submit', (e) => {
+      form.addEventListener('submit', async (e) => {
         e.preventDefault();
-        alert('Edición de perfil próximamente. Por ahora los datos se cargan desde la sesión.');
+        const fullName = `${nombreInput?.value || ''} ${apellidoInput?.value || ''}`.trim();
+        const email = correoInput?.value?.trim() || '';
+        const phone = telefonoInput?.value?.trim() || '';
+        try {
+          const res = await fetch('api/auth/update.php', {
+            method: 'POST',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name: fullName, email, phone }),
+          });
+          const data = await res.json();
+          if (!res.ok) throw new Error(data.error || 'No se pudo guardar');
+          user = data.user;
+          renderUser();
+          showMessage('Datos guardados');
+        } catch (err) {
+          showMessage(err.message || 'Error al guardar', true);
+        }
       });
+    }
+
+    function showMessage(msg, error = false) {
+      const el = document.createElement('div');
+      el.className = `perfil-toast ${error ? 'error' : 'ok'}`;
+      el.textContent = msg;
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 2200);
     }
 
     loadSession();

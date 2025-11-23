@@ -1,5 +1,11 @@
 // Capa de datos: intenta Supabase, luego JSON local, luego fallback embebido
 (function(){
+  const allowDemoProducts = () => {
+    if (typeof window.AURA_ALLOW_DEMO_PRODUCTS !== 'undefined') return Boolean(window.AURA_ALLOW_DEMO_PRODUCTS);
+    return window.location.protocol === 'file:'; // solo cuando abren directamente el html sin servidor/php
+  };
+  window.allowDemoProducts = allowDemoProducts;
+
   async function fetchFromPhp(params={}){
     const qp = new URLSearchParams();
     if (params.gender) qp.set('gender', params.gender);
@@ -41,15 +47,20 @@
   }
 
   async function fetchProducts(params={}){
+    let lastError = null;
     // 1) PHP API
-    try { return await fetchFromPhp(params); } catch(e) {}
+    try { return await fetchFromPhp(params); } catch(e) { lastError = e; }
     // 2) Supabase (opcional)
-    try { return await fetchFromSupabase(params); } catch(e) {}
-    try { return await fetchFromJson(params); } catch(e) {}
-    let items = (window.PRODUCTS_FALLBACK||[]);
-    if (params.gender) items = items.filter(p=>p.gender===params.gender);
-    if (params.search){ const q=params.search.toLowerCase(); items = items.filter(p=>p.title.toLowerCase().includes(q)); }
-    return items;
+    try { return await fetchFromSupabase(params); } catch(e) { lastError = e; }
+    if (allowDemoProducts()) {
+      try { const json = await fetchFromJson(params); if (json && json.length) return json; } catch(e) { lastError = e; }
+      let items = (window.PRODUCTS_FALLBACK||[]);
+      if (params.gender) items = items.filter(p=>p.gender===params.gender);
+      if (params.search){ const q=params.search.toLowerCase(); items = items.filter(p=>p.title.toLowerCase().includes(q)); }
+      console.warn('Usando productos de demo porque la API no respondi��', lastError);
+      return items;
+    }
+    throw lastError || new Error('products-unavailable');
   }
 
   window.fetchProducts = fetchProducts;

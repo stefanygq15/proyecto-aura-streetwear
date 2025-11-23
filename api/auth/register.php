@@ -28,10 +28,10 @@ try {
   $hash = password_hash($password, PASSWORD_DEFAULT);
   $userId = $pdo->query('SELECT UUID()')->fetchColumn();
 
-  $stmt = $pdo->prepare('INSERT INTO users (id, email, name, password_hash, role) VALUES (?, ?, ?, ?, ?)');
+  $stmt = $pdo->prepare('INSERT INTO users (id, email, full_name, password_hash, role) VALUES (?, ?, ?, ?, ?)');
   $stmt->execute([$userId, $email, $name, $hash, 'customer']);
 
-  $fresh = $pdo->prepare('SELECT id, email, name, role, created_at FROM users WHERE id = ?');
+  $fresh = $pdo->prepare('SELECT id, email, full_name AS name, phone, role, created_at FROM users WHERE id = ?');
   $fresh->execute([$userId]);
   $user = $fresh->fetch(PDO::FETCH_ASSOC);
 
@@ -39,6 +39,7 @@ try {
     'id' => $user['id'],
     'email' => $user['email'],
     'name' => $user['name'],
+    'phone' => $user['phone'] ?? '',
     'role' => $user['role'],
     'since' => $user['created_at'],
   ];

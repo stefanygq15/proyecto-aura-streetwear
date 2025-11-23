@@ -8,10 +8,10 @@ function siguientePaso(paso) {
         document.querySelectorAll('.paso-contenido').forEach(contenido => {
             contenido.classList.remove('activo');
         });
-        
+
         // Mostrar siguiente paso
         document.getElementById(`paso-${paso}`).classList.add('activo');
-        
+
         // Actualizar indicadores de pasos
         document.querySelectorAll('.paso').forEach(p => {
             p.classList.remove('activo');
@@ -25,10 +25,10 @@ function anteriorPaso(paso) {
     document.querySelectorAll('.paso-contenido').forEach(contenido => {
         contenido.classList.remove('activo');
     });
-    
+
     // Mostrar paso anterior
     document.getElementById(`paso-${paso}`).classList.add('activo');
-    
+
     // Actualizar indicadores de pasos
     document.querySelectorAll('.paso').forEach(p => {
         p.classList.remove('activo');
@@ -43,16 +43,16 @@ function validarPaso(paso) {
 }
 
 // Cambio de método de pago
-document.addEventListener('DOMContentLoaded', function() {
-        if (localStorage.getItem('altoContraste') === 'true') {
-    document.body.classList.add('alto-contraste');
-  }
+document.addEventListener('DOMContentLoaded', function () {
+    if (localStorage.getItem('altoContraste') === 'true') {
+        document.body.classList.add('alto-contraste');
+    }
     const metodosPago = document.querySelectorAll('input[name="pago"]');
     const infoTarjeta = document.getElementById('info-tarjeta');
     let resumenActual = { subtotal: 0, envio: 0, descuento: 0, total: 0 };
-    
+
     metodosPago.forEach(metodo => {
-        metodo.addEventListener('change', function() {
+        metodo.addEventListener('change', function () {
             if (this.value === 'tarjeta') {
                 infoTarjeta.style.display = 'block';
             } else {
@@ -60,32 +60,32 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-    
+
     // Render del resumen basado en carrito local
-    function currency(v){ return `$${(v||0).toLocaleString()}`; }
-    function renderResumenCheckout(){
+    function currency(v) { return `$${(v || 0).toLocaleString()}`; }
+    function renderResumenCheckout() {
         const items = window.AuraCart ? window.AuraCart.get() : [];
         const list = document.querySelector('.items-resumen');
-        if (list){
+        if (list) {
             list.innerHTML = items.map(it => `
             <div class="item-resumen">
-              <img src="${it.image||''}" class="item-imagen" alt="${it.title}">
+              <img src="${it.image || ''}" class="item-imagen" alt="${it.title}">
               <div class="item-info">
                 <div class="item-nombre">${it.title}</div>
-                <div class="item-detalles">${it.size?('Talla '+it.size+' • '):''}Cantidad: ${it.qty||1}</div>
+                <div class="item-detalles">${it.size ? ('Talla ' + it.size + ' • ') : ''}Cantidad: ${it.qty || 1}</div>
               </div>
-              <div class="item-precio">${currency((parseInt(it.price)||0)*(it.qty||1))}</div>
+              <div class="item-precio">${currency((parseInt(it.price) || 0) * (it.qty || 1))}</div>
             </div>`).join('');
         }
-        const subtotal = items.reduce((a,it)=> a + (parseInt(it.price)||0)*(it.qty||1), 0);
-        const envio = subtotal>100000?0:8000;
+        const subtotal = items.reduce((a, it) => a + (parseInt(it.price) || 0) * (it.qty || 1), 0);
+        const envio = subtotal > 100000 ? 0 : 8000;
         const descuento = 0;
         const total = subtotal + envio - descuento;
         resumenActual = { subtotal, envio, descuento, total };
-        const set = (id,val)=>{ const el=document.getElementById(id); if(el) el.textContent = val; };
+        const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
         set('co-subtotal', currency(subtotal));
-        set('co-envio', envio===0? 'Gratis': currency(envio));
-        set('co-descuento', descuento?('-'+currency(descuento)):'$0');
+        set('co-envio', envio === 0 ? 'Gratis' : currency(envio));
+        set('co-descuento', descuento ? ('-' + currency(descuento)) : '$0');
         set('co-total', currency(total));
     }
     renderResumenCheckout();
@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (alert) alert.textContent = '';
     }
 
-    form.addEventListener('submit', async function(e) {
+    form.addEventListener('submit', async function (e) {
         e.preventDefault();
         const btnPagar = this.querySelector('button[type="submit"]');
         const items = window.AuraCart ? window.AuraCart.get() : [];
@@ -151,7 +151,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 size: it.size || '',
                 image: it.image || ''
             })),
-            summary: { ...resumenActual, items_count: items.reduce((a,it)=> a + (it.qty || 1), 0) }
+            summary: { ...resumenActual, items_count: items.reduce((a, it) => a + (it.qty || 1), 0) }
         };
 
         try {
@@ -183,7 +183,7 @@ document.addEventListener('DOMContentLoaded', function() {
             btnPagar.disabled = false;
         }
     });
-    
+
     // Cargar modo alto contraste si está activo
     if (localStorage.getItem('altoContraste') === 'true') {
         document.body.classList.add('alto-contraste');

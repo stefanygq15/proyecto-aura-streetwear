@@ -1,64 +1,157 @@
 <!DOCTYPE html>
+
 <html lang="es">
+
 <head>
+
   <meta charset="UTF-8">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Pago Recibido - Aura Streetwear</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Khula:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Khula:wght@300;400;600;700&display=swap"
+    rel="stylesheet">
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
   <link rel="stylesheet" href="assets/css/style.css">
+
   <link rel="stylesheet" href="assets/css/checkout.css">
+
   <style>
-    .confirm-container{min-height:70vh;display:flex;align-items:center;justify-content:center;padding:2rem 1rem}
-    .confirm-card{background:#2f3236;border-radius:14px;box-shadow:0 20px 50px rgba(0,0,0,.6);padding:2rem;max-width:640px;width:100%;text-align:center}
-    .confirm-icon{width:80px;height:80px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;background:#1f2124;color:#fff;border:2px solid rgba(255,255,255,.15)}
-    .confirm-title{font-size:1.8rem;margin:.5rem 0 0}
-    .confirm-sub{opacity:.9;margin-bottom:1.2rem}
-    .confirm-total{font-size:1.2rem;font-weight:700;margin:.6rem 0 1rem}
-    .confirm-actions{display:flex;gap:1rem;justify-content:center;margin-top:1rem}
-    .confirm-actions a{min-width:180px}
+    .confirm-container {
+      min-height: 70vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem
+    }
+
+    .confirm-card {
+      background: #2f3236;
+      border-radius: 14px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, .6);
+      padding: 2rem;
+      max-width: 640px;
+      width: 100%;
+      text-align: center
+    }
+
+    .confirm-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      background: #1f2124;
+      color: #fff;
+      border: 2px solid rgba(255, 255, 255, .15)
+    }
+
+    .confirm-title {
+      font-size: 1.8rem;
+      margin: .5rem 0 0
+    }
+
+    .confirm-sub {
+      opacity: .9;
+      margin-bottom: 1.2rem
+    }
+
+    .confirm-total {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin: .6rem 0 1rem
+    }
+
+    .confirm-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 1rem
+    }
+
+    .confirm-actions a {
+      min-width: 180px
+    }
   </style>
+
 </head>
+
 <body>
+
   <header class="header">
+
     <div class="header-left">
+
       <a href="index.html" class="menu-toggle" aria-label="Inicio"><i class="fas fa-chevron-left"></i></a>
+
     </div>
+
     <div class="header-center">
-      <a href="index.html" class="brand"><h1 class="logo-text">AURA STREETWEAR</h1></a>
+
+      <a href="index.html" class="brand">
+        <h1 class="logo-text">AURA STREETWEAR</h1>
+      </a>
+
     </div>
+
     <div class="header-right iconos-header">
+
       <a href="login.html" class="icono-header" aria-label="Cuenta"><i class="fas fa-user"></i></a>
+
     </div>
+
   </header>
 
+
+
   <main class="confirm-container">
+
     <section class="confirm-card">
+
       <div class="confirm-icon"><i class="fas fa-check fa-2x"></i></div>
+
       <h2 class="confirm-title">Pago recibido</h2>
-      <p class="confirm-sub">¡Gracias por tu compra! Tu envío está en proceso.</p>
+
+      <p class="confirm-sub">Gracias por tu compra! Tu envío está en proceso.</p>
+
       <div class="confirm-total" id="orderTotal">Total: $0</div>
+
       <p class="confirm-sub" id="orderInfo"></p>
+
       <div class="confirm-actions">
+
         <a href="catalogo-hombres.html" class="btn btn-secundario">Seguir comprando</a>
+
         <a href="index.html" class="btn btn-primario">Volver al inicio</a>
+
       </div>
+
     </section>
+
   </main>
 
+
+
   <script>
-    (function(){
-      try{
-        const data = JSON.parse(localStorage.getItem('aura_last_order')||'{}');
-        if (data){
-          const total = data.total_formatted || (data.summary ? `${(data.summary.total||0).toLocaleString()}` : data.total);
+    (function () {
+      try {
+        const data = JSON.parse(localStorage.getItem('aura_last_order') || '{}');
+        if (data) {
+          const total = data.total_formatted || (data.summary ? `${(data.summary.total || 0).toLocaleString()}` : data.total);
           if (total) document.getElementById('orderTotal').textContent = `Total: ${total}`;
           const count = data.items_count || data.summary?.items_count || 0;
-          if (data.id) document.getElementById('orderInfo').textContent = `Orden #${data.id} · ${count || 0} artículo(s)`;
+          if (data.id) document.getElementById('orderInfo').textContent = `Orden #${data.id}  ${count || 0} artículo(s)`;
         }
-      }catch(e){}
+      } catch (e) { }
     })();
   </script>
-</body>
-</html>
 
+</body>
+
+</html>

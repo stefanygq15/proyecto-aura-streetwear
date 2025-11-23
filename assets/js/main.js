@@ -17,7 +17,7 @@
       const items = this.get();
       const identifier = newItem.id || newItem.slug || newItem.title;
       const key = `${identifier}|${newItem.size || ''}`.toLowerCase();
-      const found = items.find(it => (`${it.id || it.slug || it.title}|${it.size||''}`).toLowerCase() === key);
+      const found = items.find(it => (`${it.id || it.slug || it.title}|${it.size || ''}`).toLowerCase() === key);
       if (found) { found.qty = (found.qty || 1) + (newItem.qty || 1); }
       else { items.push({ ...newItem, qty: newItem.qty || 1 }); }
       this.save(items);
@@ -176,11 +176,11 @@
   }
 
   // Sugerencias en tiempo real en el menú hamburguesa
-  (function(){
+  (function () {
     if (!overlaySearchInput) return;
     // contenedor de sugerencias
     let suggest = document.getElementById('overlaySuggest');
-    if (!suggest){
+    if (!suggest) {
       suggest = document.createElement('div');
       suggest.id = 'overlaySuggest';
       suggest.className = 'overlay-suggest';
@@ -189,32 +189,32 @@
       if (parent) parent.appendChild(suggest);
     }
     let lastQ = '';
-    async function doSuggest(q){
-      if (!q || q.length < 2){ suggest.classList.remove('open'); suggest.innerHTML = ''; return; }
-      try{
+    async function doSuggest(q) {
+      if (!q || q.length < 2) { suggest.classList.remove('open'); suggest.innerHTML = ''; return; }
+      try {
         let items = [];
         if (window.fetchProducts) items = await window.fetchProducts({ search: q });
-        if (!items || !items.length) { suggest.classList.remove('open'); suggest.innerHTML=''; return; }
-        suggest.innerHTML = items.slice(0,8).map(p=>
+        if (!items || !items.length) { suggest.classList.remove('open'); suggest.innerHTML = ''; return; }
+        suggest.innerHTML = items.slice(0, 8).map(p =>
           `<div class="overlay-suggest-item" data-q="${p.title}">
-            <img src="${p.image||''}" alt="${p.title}">
+            <img src="${p.image || ''}" alt="${p.title}">
             <div style="flex:1">${p.title}</div>
-            <div>$${(p.price||0).toLocaleString()}</div>
+            <div>$${(p.price || 0).toLocaleString()}</div>
           </div>`).join('');
         suggest.classList.add('open');
-      }catch(e){ suggest.classList.remove('open'); }
+      } catch (e) { suggest.classList.remove('open'); }
     }
-    overlaySearchInput.addEventListener('input', (e)=>{
+    overlaySearchInput.addEventListener('input', (e) => {
       const q = e.target.value.trim();
       if (q === lastQ) return; lastQ = q; doSuggest(q);
     });
-    suggest.addEventListener('click', (e)=>{
+    suggest.addEventListener('click', (e) => {
       const item = e.target.closest('.overlay-suggest-item');
       if (!item) return;
       const q = item.getAttribute('data-q');
       window.location.href = `coleccion.html?search=${encodeURIComponent(q)}`;
     });
-    document.addEventListener('keydown', (e)=>{ if (e.key==='Escape') suggest.classList.remove('open'); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') suggest.classList.remove('open'); });
   })();
 
   // Render contenido del drawer
@@ -306,4 +306,86 @@
 
   // Exponer apertura del carrito
   window.openCartOverlay = openCart;
+})();
+
+// Aviso sencillo de cookies (persistencia en cookie, no en localStorage)
+(() => {
+  const COOKIE_NAME = 'aura_cookie_consent';
+
+  const getCookie = (name) => {
+    const eq = `${name}=`;
+    const found = document.cookie.split(';').map(c => c.trim()).find(c => c.startsWith(eq));
+    return found ? decodeURIComponent(found.slice(eq.length)) : null;
+  };
+
+  const setCookie = (name, value, days = 180) => {
+    const date = new Date();
+    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+    const expires = `expires=${date.toUTCString()}`;
+    document.cookie = `${name}=${encodeURIComponent(value)};${expires};path=/`;
+  };
+
+  const currentConsent = getCookie(COOKIE_NAME);
+  if (currentConsent === 'accepted' || currentConsent === 'rejected') return;
+
+  const style = document.createElement('style');
+  style.textContent = `
+    .cookie-banner {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 2000;
+      background: rgba(23, 24, 27, 0.96);
+      color: #f5f5f5;
+      padding: 1rem 1.25rem;
+      box-shadow: 0 -6px 24px rgba(0,0,0,0.25);
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+      font-size: 0.95rem;
+    }
+    .cookie-banner strong { color: #e9786f; }
+    .cookie-banner button {
+      background: #e9786f;
+      color: #fff;
+      border: none;
+      padding: 0.55rem 1.2rem;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .cookie-banner button.secondary {
+      background: transparent;
+      color: #f5f5f5;
+      border: 1px solid rgba(255,255,255,0.25);
+    }
+    .cookie-banner a {
+      color: #f5f5f5;
+      text-decoration: underline;
+    }
+  `;
+  document.head.appendChild(style);
+
+  const banner = document.createElement('div');
+  banner.className = 'cookie-banner';
+  banner.setAttribute('role', 'alert');
+  banner.innerHTML = `
+    <div style="flex:1;min-width:240px;">¿Nos das permiso para usar cookies de preferencia y medición? Puedes leer más en la <a href="nosotros.html" aria-label="Ver política de privacidad">política de privacidad</a>.</div>
+    <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
+      <button type="button" id="rejectCookies" class="secondary">Rechazar</button>
+      <button type="button" id="acceptCookies">Aceptar</button>
+    </div>
+  `;
+  document.body.appendChild(banner);
+
+  banner.querySelector('#acceptCookies').addEventListener('click', () => {
+    setCookie(COOKIE_NAME, 'accepted');
+    banner.remove();
+  });
+  banner.querySelector('#rejectCookies').addEventListener('click', () => {
+    setCookie(COOKIE_NAME, 'rejected');
+    banner.remove();
+  });
 })();

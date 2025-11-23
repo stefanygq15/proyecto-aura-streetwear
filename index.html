@@ -1,17 +1,22 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Aura Streetwear - Moda Urbana</title>
   <link rel="stylesheet" href="assets/css/style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Khula:wght@400;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Khula:wght@400;600;700&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
+
 <body>
 
   <!-- Botón de alto contraste - SOLO EN INDEX -->
-  <button id="contrastToggle" class="contrast-toggle" aria-label="Activar modo alto contraste" title="Activar modo alto contraste">
+  <button id="contrastToggle" class="contrast-toggle" aria-label="Activar modo alto contraste"
+    title="Activar modo alto contraste">
     <i class="fas fa-adjust"></i>
   </button>
 
@@ -22,7 +27,7 @@
       </button>
     </div>
     <div class="header-center">
-      <a href="index.html" class="brand">
+      <a href="index.html" class="brand" aria-label="Aura Streetwear">
         <h1 class="logo-text">AURA STREETWEAR</h1>
       </a>
     </div>
@@ -32,9 +37,10 @@
       </a>
       <a href="#" id="openCart" class="icono-header" aria-label="Carrito de compras">
         <i class="fas fa-shopping-bag"></i>
-        <span class="contador-carrito">3</span>
+        <span class="contador-carrito">0</span>
       </a>
     </div>
+
     <nav class="overlay-menu" id="overlayMenu" aria-hidden="true">
       <div class="overlay-header">
         <button id="closeMenu" class="close-menu" aria-label="Cerrar menú"><i class="fas fa-chevron-left"></i></button>
@@ -42,18 +48,21 @@
       </div>
       <div class="overlay-search">
         <form class="overlay-search-form" id="overlaySearch">
-          <input class="overlay-search-input" id="overlaySearchInput" type="search" placeholder="Buscar productos..." aria-label="Buscar productos" />
+          <input class="overlay-search-input" id="overlaySearchInput" type="search" placeholder="Buscar productos..."
+            aria-label="Buscar productos" />
           <button class="overlay-search-btn" aria-label="Buscar"><i class="fas fa-search"></i></button>
         </form>
       </div>
       <div class="overlay-group">
-        <a href="login.html" class="overlay-link"><span><i class="fas fa-user"></i> Cuenta</span><i class="fas fa-chevron-right"></i></a>
+        <a href="login.html" class="overlay-link"><span><i class="fas fa-user"></i> Cuenta</span><i
+            class="fas fa-chevron-right"></i></a>
       </div>
       <div class="overlay-subgroup">
         <a href="catalogo-hombres.html" class="overlay-sublink">Hombres</a>
         <a href="catalogo-mujeres.html" class="overlay-sublink">Mujeres</a>
       </div>
     </nav>
+
     <aside class="cart-drawer" id="overlayCart" aria-hidden="true">
       <div class="cart-header">
         <span class="title"><i class="fas fa-shopping-bag"></i> Tu Carrito</span>
@@ -61,7 +70,7 @@
       </div>
       <div class="cart-body"><!-- contenido generado por JS --></div>
       <div class="cart-footer">
-        <div class="cart-total"><span>Total</span><span>$124.000</span></div>
+        <div class="cart-total"><span>Total</span><span>$0</span></div>
         <a class="btn-cart" href="carrito.html">Ver carrito</a>
         <a class="btn-checkout" href="checkout.html">Comprar Ahora</a>
       </div>
@@ -69,7 +78,17 @@
   </header>
 
   <main id="main-content">
+
     <section class="hero">
+      <div class="hero-bg-track">
+        <div class="bg-slide active"><img src="assets/principal-header/1.png" alt="Header 1"></div>
+        <div class="bg-slide"><img src="assets/principal-header/2.png" alt="Header 2"></div>
+        <div class="gradient-mask"></div>
+      </div>
+      <div class="hero-arrows">
+        <button class="hero-arrow prev" aria-label="Anterior"><i class="fas fa-chevron-left"></i></button>
+        <button class="hero-arrow next" aria-label="Siguiente"><i class="fas fa-chevron-right"></i></button>
+      </div>
       <div class="hero-text">
         <h1>Aura Streetwear</h1>
         <p>Descubre las nuevas tendencias en moda streetwear con diseños exclusivos y personalizados.</p>
@@ -77,124 +96,81 @@
       </div>
     </section>
 
+    <section class="hero-slider contenedor" id="homeSlider">
+      <button class="slider-arrow prev" aria-label="Anterior"><i class="fas fa-chevron-left"></i></button>
+      <div class="slider-track">
+        <article class="slide active">
+          <img src="assets/slider/1.png" alt="Estilo Urbano">
+          <div class="slide-overlay">
+            <h3>Estilo Urbano</h3>
+            <p>Diseños limpios y actitud street para todos los días.</p>
+          </div>
+        </article>
+        <article class="slide">
+          <img src="assets/slider/2.png" alt="Nueva Colección">
+          <div class="slide-overlay">
+            <h3>Nueva Colección</h3>
+            <p>Descubre las últimas tendencias de la temporada.</p>
+          </div>
+        </article>
+        <article class="slide">
+          <img src="assets/slider/3.png" alt="Edición Limitada">
+          <div class="slide-overlay">
+            <h3>Edición Limitada</h3>
+            <p>Piezas exclusivas con stock reducido.</p>
+          </div>
+        </article>
+        <article class="slide">
+          <img src="assets/slider/4.png" alt="Confort y Estilo">
+          <div class="slide-overlay">
+            <h3>Confort y Estilo</h3>
+            <p>La mejor calidad para tu día a día.</p>
+          </div>
+        </article>
+        <article class="slide">
+          <img src="assets/slider/5.png" alt="Aura Streetwear">
+          <div class="slide-overlay">
+            <h3>Aura Streetwear</h3>
+            <p>Define tu propio estilo con nosotros.</p>
+          </div>
+        </article>
+      </div>
+      <button class="slider-arrow next" aria-label="Siguiente"><i class="fas fa-chevron-right"></i></button>
+      <div class="slider-dots" aria-hidden="true"></div>
+    </section>
+
     <section class="colecciones contenedor">
       <h2>Nuestras Colecciones</h2>
       <div class="categorias-grid">
         <div class="categoria-card">
-          <img src="assets/images/cam1-h.png" alt="Modelo masculino usando camiseta streetwear básica color negro" class="categoria-img">
+          <img src="assets/images/cam1-h.png" alt="Modelo masculino usando camiseta streetwear básica color negro"
+            class="categoria-img">
           <div class="categoria-overlay">
             <h3 class="categoria-titulo">Hombres</h3>
             <a href="catalogo-hombres.html" class="btn btn-secundario">Ver más</a>
           </div>
         </div>
-        
+
         <div class="categoria-card">
-          <img src="assets/images/cam1-m.png" alt="Modelo femenina usando camiseta streetwear oversize color gris" class="categoria-img">
+          <img src="assets/images/cam1-m.png" alt="Modelo femenina usando camiseta streetwear oversize color gris"
+            class="categoria-img">
           <div class="categoria-overlay">
             <h3 class="categoria-titulo">Mujeres</h3>
             <a href="catalogo-mujeres.html" class="btn btn-secundario">Ver más</a>
           </div>
         </div>
-        
-          
       </div>
     </section>
 
     <section class="productos">
       <div class="contenedor">
         <h2>Productos Destacados</h2>
-        
         <div class="filtros" role="tablist" aria-label="Filtrar productos por categoría">
-          <button class="filtro-btn activo" role="tab" aria-selected="true" aria-controls="todos-productos">Todos</button>
-          <button class="filtro-btn" role="tab" aria-selected="false" aria-controls="hombres-productos">Hombres</button>
-          <button class="filtro-btn" role="tab" aria-selected="false" aria-controls="mujeres-productos">Mujeres</button>
+          <button class="filtro-btn activo" role="tab" aria-selected="true" data-filter="todos">Todos</button>
+          <button class="filtro-btn" role="tab" aria-selected="false" data-filter="hombres">Hombres</button>
+          <button class="filtro-btn" role="tab" aria-selected="false" data-filter="mujeres">Mujeres</button>
         </div>
-        
-        <div class="productos-grid">
-          <div class="producto-card" role="article" aria-labelledby="producto-1" data-genero="hombres">
-            <div class="producto-imagen-contenedor">
-              <img src="assets/images/cam3-h.png" alt="Camiseta básica color gris para hombre, corte regular" class="producto-imagen">
-              <div class="producto-acciones">
-                <button class="accion-btn" aria-label="Agregar a favoritos"><i class="far fa-heart"></i></button>
-                <button class="accion-btn" aria-label="Ver detalles del producto"><i class="fas fa-search"></i></button>
-              </div>
-            </div>
-            <div class="producto-info">
-              <h3 class="producto-titulo" id="producto-1">Camiseta Básica Gris</h3>
-              <p class="producto-precio">$59.000</p>
-              <div class="producto-tallas" role="group" aria-label="Seleccionar talla">
-                <button class="talla-btn" aria-pressed="false">S</button>
-                <button class="talla-btn activa" aria-pressed="true">M</button>
-                <button class="talla-btn" aria-pressed="false">L</button>
-                <button class="talla-btn" aria-pressed="false">XL</button>
-              </div>
-              <button class="btn-carrito">Añadir al carrito <i class="fas fa-shopping-bag"></i></button>
-            </div>
-          </div>
-          
-          <div class="producto-card" role="article" aria-labelledby="producto-2" data-genero="hombres">
-            <div class="producto-imagen-contenedor">
-              <img src="assets/images/pan2-h.png" alt="Sudadera ajustada color negro para hombre, con capucha" class="producto-imagen">
-              <div class="producto-acciones">
-                <button class="accion-btn" aria-label="Agregar a favoritos"><i class="far fa-heart"></i></button>
-                <button class="accion-btn" aria-label="Ver detalles del producto"><i class="fas fa-search"></i></button>
-              </div>
-            </div>
-            <div class="producto-info">
-              <h3 class="producto-titulo" id="producto-2">Sudadera Ajustada Negra</h3>
-              <p class="producto-precio">$65.000</p>
-              <div class="producto-tallas" role="group" aria-label="Seleccionar talla">
-                <button class="talla-btn" aria-pressed="false">S</button>
-                <button class="talla-btn" aria-pressed="false">M</button>
-                <button class="talla-btn activa" aria-pressed="true">L</button>
-                <button class="talla-btn" aria-pressed="false">XL</button>
-              </div>
-              <button class="btn-carrito">Añadir al carrito <i class="fas fa-shopping-bag"></i></button>
-            </div>
-          </div>
-          
-          <div class="producto-card" role="article" aria-labelledby="producto-3" data-genero="mujeres">
-            <div class="producto-imagen-contenedor">
-              <img src="assets/images/pan3-m.png" alt="Jean azul de corte ancho para mujer, estilo streetwear" class="producto-imagen">
-              <div class="producto-acciones">
-                <button class="accion-btn" aria-label="Agregar a favoritos"><i class="far fa-heart"></i></button>
-                <button class="accion-btn" aria-label="Ver detalles del producto"><i class="fas fa-search"></i></button>
-              </div>
-            </div>
-            <div class="producto-info">
-              <h3 class="producto-titulo" id="producto-3">Jean Azul Ancho</h3>
-              <p class="producto-precio">$72.000</p>
-              <div class="producto-tallas" role="group" aria-label="Seleccionar talla">
-                <button class="talla-btn" aria-pressed="false">S</button>
-                <button class="talla-btn" aria-pressed="false">M</button>
-                <button class="talla-btn" aria-pressed="false">L</button>
-                <button class="talla-btn activa" aria-pressed="true">XL</button>
-              </div>
-              <button class="btn-carrito">Añadir al carrito <i class="fas fa-shopping-bag"></i></button>
-            </div>
-          </div>
-          
-          <div class="producto-card" role="article" aria-labelledby="producto-4" data-genero="mujeres">
-            <div class="producto-imagen-contenedor">
-              <img src="assets/images/pan2-m.png" alt="Sudadera ancha color negro para mujer, estilo oversize" class="producto-imagen">
-              <div class="producto-acciones">
-                <button class="accion-btn" aria-label="Agregar a favoritos"><i class="far fa-heart"></i></button>
-                <button class="accion-btn" aria-label="Ver detalles del producto"><i class="fas fa-search"></i></button>
-              </div>
-            </div>
-            <div class="producto-info">
-              <h3 class="producto-titulo" id="producto-4">Sudadera Ancha Negra</h3>
-              <p class="producto-precio">$85.000</p>
-              <div class="producto-tallas" role="group" aria-label="Seleccionar talla">
-                <button class="talla-btn activa" aria-pressed="true">S</button>
-                <button class="talla-btn" aria-pressed="false">M</button>
-                <button class="talla-btn" aria-pressed="false">L</button>
-                <button class="talla-btn" aria-pressed="false">XL</button>
-              </div>
-              <button class="btn-carrito">Añadir al carrito <i class="fas fa-shopping-bag"></i></button>
-            </div>
-          </div>
-        </div>
+        <div class="productos-grid" id="grid-destacados"></div>
       </div>
     </section>
 
@@ -203,17 +179,22 @@
         <h2>Únete a nuestra comunidad</h2>
         <p>Suscríbete para recibir las últimas novedades, lanzamientos exclusivos y descuentos especiales.</p>
         <form class="form-newsletter">
-          <input type="email" placeholder="Tu correo electrónico" class="input-newsletter" required aria-label="Ingresa tu correo electrónico para suscribirte">
+          <input type="email" placeholder="Tu correo electrónico" class="input-newsletter" required
+            aria-label="Ingresa tu correo electrónico para suscribirte">
           <button type="submit" class="btn btn-newsletter">Suscribirse</button>
         </form>
       </div>
     </section>
+
   </main>
 
   <footer class="footer" role="contentinfo">
     <div class="contenedor">
       <div class="footer-contenido">
         <div class="footer-col">
+          <div class="footer-logo-box">
+            <img src="assets/logos/logo.png" alt="Aura Streetwear" class="footer-logo">
+          </div>
           <h3>Aura Streetwear</h3>
           <p>Moda urbana con estilo y actitud. Diseños exclusivos para hombres y mujeres que quieren destacar.</p>
           <div class="footer-redes">
@@ -223,7 +204,7 @@
             <a href="#" class="red-social" aria-label="Contáctanos por WhatsApp"><i class="fab fa-whatsapp"></i></a>
           </div>
         </div>
-        
+
         <div class="footer-col">
           <h3>Comprar</h3>
           <ul class="footer-links">
@@ -231,14 +212,14 @@
             <li><a href="catalogo-mujeres.html">Mujeres</a></li>
           </ul>
         </div>
-        
+
         <div class="footer-col">
           <h3>Información</h3>
           <ul class="footer-links">
             <li><a href="nosotros.html">Sobre nosotros</a></li>
           </ul>
         </div>
-        
+
         <div class="footer-col">
           <h3>Contacto</h3>
           <ul class="footer-links">
@@ -248,7 +229,7 @@
           </ul>
         </div>
       </div>
-      
+
       <div class="footer-bottom">
         <p>&copy; 2025 Aura Streetwear. Todos los derechos reservados.</p>
       </div>
@@ -259,7 +240,7 @@
     // Menu toggle
     const menuToggle = document.querySelector('.menu-toggle');
     if (menuToggle) {
-      menuToggle.addEventListener('click', function() {
+      menuToggle.addEventListener('click', function () {
         document.querySelector('.nav').classList.toggle('active');
       });
     }
@@ -267,7 +248,7 @@
     // Filtros de productos
     const filtroBtns = document.querySelectorAll('.filtro-btn');
     filtroBtns.forEach(btn => {
-      btn.addEventListener('click', function() {
+      btn.addEventListener('click', function () {
         filtroBtns.forEach(b => {
           b.classList.remove('activo');
           b.setAttribute('aria-selected', 'false');
@@ -277,10 +258,10 @@
       });
     });
 
-    // Selección de tallas
+    // Seleccin de tallas
     const tallaBtns = document.querySelectorAll('.talla-btn');
     tallaBtns.forEach(btn => {
-      btn.addEventListener('click', function() {
+      btn.addEventListener('click', function () {
         this.parentElement.querySelectorAll('.talla-btn').forEach(b => {
           b.classList.remove('activa');
           b.setAttribute('aria-pressed', 'false');
@@ -303,9 +284,8 @@
       }
 
       // Evento para cambiar modo
-      contrastToggle.addEventListener('click', function() {
+      contrastToggle.addEventListener('click', function () {
         document.body.classList.toggle('alto-contraste');
-        
         // Cambiar icono y texto accesible
         const icon = this.querySelector('i');
         if (document.body.classList.contains('alto-contraste')) {
@@ -324,12 +304,11 @@
       });
     }
 
-    // Navegación por teclado en dropdowns
+    // Navegacin por teclado en dropdowns
     document.querySelectorAll('.dropdown').forEach(dropdown => {
       const trigger = dropdown.querySelector('a');
       const menu = dropdown.querySelector('.dropdown-menu');
-      
-      trigger.addEventListener('keydown', function(e) {
+      trigger.addEventListener('keydown', function (e) {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
           const isExpanded = this.getAttribute('aria-expanded') === 'true';
@@ -339,10 +318,13 @@
       });
     });
   </script>
+
   <script src="assets/js/products.fallback.js"></script>
   <script src="assets/js/config.js"></script>
   <script src="assets/js/products.api.js"></script>
+  <script src="assets/js/home-products.js?v=2"></script>
   <script src="assets/js/index.js"></script>
   <script src="assets/js/main.js"></script>
 </body>
+
 </html>
